@@ -13,7 +13,6 @@ name VARCHAR(20),
 abreviation VARCHAR(3)
 
 );
-
 INSERT INTO Currency (name, abreviation)
 VALUES 
 ("dolars","USD"),
@@ -79,7 +78,7 @@ SET Farms_id=1 LIMIT 100;
 CREATE TABLE Countable (
 id int UNSIGNED PRIMARY KEY auto_increment,
 quantity DECIMAL(6,2),
-name VARCHAR(10),
+name VARCHAR(20),
 Farms_id tinyint UNSIGNED,
 foreign key(Farms_id) references Farms(id)
 
@@ -87,7 +86,7 @@ foreign key(Farms_id) references Farms(id)
 
 CREATE TABLE Purchasable (
 id int UNSIGNED PRIMARY KEY auto_increment,
-price_per_unit DECIMAL(5,2),
+price_per_unit DECIMAL(10,2),
 Countable_id int UNSIGNED,
 Currency_id tinyint UNSIGNED,
 foreign key(Countable_id) references Countable(id),
@@ -112,14 +111,132 @@ foreign key(Purchasable_id) references Purchasable(id)
 
 );
 
+CREATE TABLE CropStates (
+id tinyint UNSIGNED PRIMARY KEY auto_increment,
+name VARCHAR(25)
+);
+INSERT INTO CropStates (name)
+VALUES 
+("ready to plant"),
+("planted"),
+("growing"),
+("ready to harvest"),
+("harvested")
+;
+
+CREATE TABLE Crops (
+id int UNSIGNED PRIMARY KEY auto_increment,
+germination_rate DECIMAL(5,2),
+growth_percentage DECIMAL(5,2),
+growth_per_day DECIMAL(5,2),
+Countable_id int UNSIGNED,
+CropStates_id tinyint UNSIGNED,
+foreign key(Countable_id) references Countable(id),
+foreign key(CropStates_id) references CropStates(id)
+
+);
+
+CREATE TABLE Tools (
+id int UNSIGNED PRIMARY KEY auto_increment,
+wear_and_tear_percentage DECIMAL(5,2),
+wear_and_tear_per_day DECIMAL(5,2),
+Purchasable_id int UNSIGNED,
+foreign key(Purchasable_id) references Purchasable(id)
+
+);
+
+CREATE TABLE Units (
+id TINYINT UNSIGNED PRIMARY KEY auto_increment,
+unit VARCHAR(25),
+abreviation VARCHAR(5)
+
+);
+INSERT INTO Units (unit, abreviation)
+VALUES 
+("each", "EA"), -- 1
+("units", "UN"),
+("pieces", "PC"),
+("kilograms", "kg"), 
+("grams", "g"), -- 5
+("milligrams", "mg"),
+("tons", "t"),
+("pounds", "lb"), 
+("ounces", "oz"),
+("liters", "L"), -- 10
+("milliliters", "mL"),
+("gallons", "gal"),
+("pints", "pt"), 
+("quarts", "qt")
+;
+
+CREATE TABLE AnimalFeed (
+id int UNSIGNED PRIMARY KEY auto_increment,
+consumption_rate_per_day DECIMAL(5,2),
+Units_id TINYINT UNSIGNED,
+Purchasable_id int UNSIGNED,
+foreign key(Purchasable_id) references Purchasable(id),
+foreign key(Units_id) references Units(id)
+);
+
+CREATE TABLE AnimalFood (
+id int UNSIGNED PRIMARY KEY auto_increment,
+production_rate_per_day DECIMAL(5,2),
+Units_id TINYINT UNSIGNED,
+Countable_id int UNSIGNED,
+foreign key(Countable_id) references Countable(id),
+foreign key(Units_id) references Units(id)
+);
+
+CREATE TABLE AnimalType (
+id INT UNSIGNED PRIMARY KEY auto_increment,
+category VARCHAR(15),
+subcategory VARCHAR(30)
+);
+INSERT INTO AnimalType (category, subcategory)
+VALUES 
+("Aquaculture","Fish"),-- 1
+("Aquaculture", "Shellfish"), 
+("Aquaculture", "Undefined Aquaculture"), 
+("Equines","Horses"), 
+("Equines", "Donkeys"), -- 5
+("Equines", "Mules"),
+("Equines","Undefined Equines"),
+("Livestock", "Cattle"),
+("Livestock", "Pigs"),
+("Livestock","Sheep"), -- 10
+("Livestock", "Goats"),
+("Livestock", "Undefined Livestock"),
+("Poultry","Chickens"),
+("Poultry", "Turkeys"),
+("Poultry", "Ducks"), -- 15
+("Poultry","Geese"),
+("Poultry", "Undefined Poultry"),
+("Others", "Rabbits"),
+("Others", "Bees"), 
+("Others","Alpacas"), -- 20
+("Others", "Undefined Others")
+;
+
+CREATE TABLE Animals (
+id int UNSIGNED PRIMARY KEY auto_increment,
+Purchasable_id int UNSIGNED,
+AnimalFood_id int UNSIGNED,
+AnimalFeed_id int UNSIGNED,
+AnimalType_id int UNSIGNED,
+foreign key(Purchasable_id) references Purchasable(id),
+foreign key(AnimalFood_id) references AnimalFood(id),
+foreign key(AnimalFeed_id) references AnimalFeed(id),
+foreign key(AnimalType_id) references AnimalType(id)
+);
+
 -- Lets create some procedures, to abreviate the syntax and avoid code repetition in data insertions.
 -- PROCEDURES
 DELIMITER $$
 
 CREATE PROCEDURE InsertPurchasable(
-    IN p_name VARCHAR(10),
+    IN p_name VARCHAR(20),
     IN p_quantity DECIMAL(6,2),
-    IN p_price_per_unit DECIMAL(5, 2),
+    IN p_price_per_unit DECIMAL(10, 2),
     IN p_Farms_id TINYINT
     )
 BEGIN
@@ -128,8 +245,8 @@ BEGIN
 
 	INSERT INTO Countable (name, quantity, Farms_id)
 	VALUES (p_name, p_quantity,p_Farms_id);
-	INSERT INTO Purchasable (price_per_unit, Countable_id)
-	VALUES (p_price_per_unit, LAST_INSERT_ID());
+	INSERT INTO Purchasable (price_per_unit, Countable_id, Currency_id)
+	VALUES (p_price_per_unit, LAST_INSERT_ID(),1);
 	
     -- At the end we commit, if there are not errors.
     COMMIT;
@@ -167,6 +284,134 @@ BEGIN
     COMMIT;
 END$$
 
+CREATE PROCEDURE InsertCountable(
+    IN p_name VARCHAR(20),
+    IN p_quantity DECIMAL(6,2),
+    IN p_Farms_id TINYINT
+    )
+BEGIN   
+    START TRANSACTION;
+
+	INSERT INTO Countable (name, quantity, Farms_id)
+	VALUES (p_name, p_quantity,p_Farms_id);	
+  
+    COMMIT;
+
+END$$
+
+CREATE PROCEDURE InsertCrop(
+    IN p_germination_rate DECIMAL(5,2),
+    IN p_growth_percentage DECIMAL(5,2),
+    IN p_growth_per_day DECIMAL(5,2),
+    IN p_CropStates_id TINYINT 
+    )
+BEGIN    
+    START TRANSACTION;
+
+	INSERT INTO Crops 
+    (germination_rate, growth_percentage, growth_per_day, Countable_id,CropStates_id)
+	VALUES 
+    (p_germination_rate, p_growth_percentage, p_growth_per_day, LAST_INSERT_ID(), p_CropStates_id);
+	
+    COMMIT;
+
+END$$
+
+CREATE PROCEDURE InsertTool(    
+    IN p_wear_and_tear_percentage DECIMAL(5,2),
+    IN p_wear_and_tear_per_day DECIMAL(5,2)    
+    )
+BEGIN
+    START TRANSACTION;
+	    
+	INSERT INTO Tools (wear_and_tear_percentage, wear_and_tear_per_day, Purchasable_id)
+	VALUES (p_wear_and_tear_percentage, p_wear_and_tear_per_day, LAST_INSERT_ID());
+   
+    COMMIT;
+END$$
+
+
+CREATE PROCEDURE InsertAnimalFood(
+    IN p_name VARCHAR(20),
+    IN p_quantity DECIMAL(6,2),
+    IN p_Farms_id TINYINT,
+    IN p_production_rate_per_day DECIMAL(5,2),
+    IN p_Units_id TINYINT UNSIGNED
+    )
+BEGIN    
+    START TRANSACTION;
+    Call InsertCountable(p_name, p_quantity,p_Farms_id);
+	INSERT INTO AnimalFood (production_rate_per_day, Units_id, Countable_id)
+	VALUES (p_production_rate_per_day, p_Units_id, LAST_INSERT_ID());
+	COMMIT;
+
+END$$
+
+CREATE PROCEDURE InsertAnimalFeed(  
+	IN p_name VARCHAR(20),
+    IN p_quantity DECIMAL(6,2),  
+	IN p_price_per_unit DECIMAL(10, 2),	
+    IN p_Farms_id TINYINT,
+    IN p_consumption_rate_per_day DECIMAL(5,2),
+    IN p_Units_id TINYINT UNSIGNED
+    )
+BEGIN
+    START TRANSACTION;
+	
+    Call InsertPurchasable(p_name, p_quantity, p_price_per_unit, p_Farms_id);
+	INSERT INTO AnimalFeed (consumption_rate_per_day, Units_id, Purchasable_id)
+	VALUES (p_consumption_rate_per_day, p_Units_id, LAST_INSERT_ID());
+   
+    COMMIT;
+END$$
+
+CREATE PROCEDURE InsertAnimal(  
+	IN p_Purchasable_id INT,
+    IN p_AnimalFood_id INT,  
+	IN p_AnimalFeed_id INT,	
+    IN p_AnimalType_id INT
+    )
+BEGIN
+    START TRANSACTION;
+	
+	INSERT INTO Animals (Purchasable_id, AnimalFood_id, AnimalFeed_id, AnimalType_id)
+	VALUES (p_Purchasable_id, p_AnimalFood_id, p_AnimalFeed_id,p_AnimalType_id);
+   
+    COMMIT;
+END$$
+
+CREATE FUNCTION GetUnitId(
+    p_unit VARCHAR(25) -- Parameter
+) 
+RETURNS TINYINT UNSIGNED 
+READS SQL DATA
+BEGIN
+    DECLARE unit_id TINYINT UNSIGNED; -- Variable to store the id
+    
+    -- Consult the id based on the unit
+    SELECT id 
+    INTO unit_id 
+    FROM Units 
+    WHERE unit = p_unit;
+        
+    RETURN unit_id; -- returns found id
+END$$
+
+CREATE FUNCTION GetAnimalTypeId(
+    p_subcategory VARCHAR(30) -- Parameter
+) 
+RETURNS INT UNSIGNED 
+READS SQL DATA
+BEGIN
+    DECLARE AnimalType_id INT UNSIGNED; -- Variable to store the id
+       
+    SELECT id 
+    INTO AnimalType_id 
+    FROM AnimalType 
+    WHERE subcategory = p_subcategory;
+        
+    RETURN AnimalType_id; -- returns found id
+END$$
 
 DELIMITER ;
 
@@ -174,14 +419,64 @@ DELIMITER ;
 -- Use of the PROCEDURES
 
 -- Insert grain (name, quantity, price_per_unit, Farms_id)
-CALL InsertGrain("Corn",100,1,1);
-CALL InsertGrain("Wheat",50,2,1);
-CALL InsertGrain("Rice",80,0.5,1);
-CALL InsertGrain("Soybean",70,0.8,1);
-CALL InsertGrain("Barley",110,1,1);
-CALL InsertGrain("Quinoa",150,1.5,1);
+CALL InsertGrain("Corn", 100, 1, 1);
+CALL InsertGrain("Wheat", 50, 2, 1);
+CALL InsertGrain("Rice", 80, 0.5, 1);
+CALL InsertGrain("Soybean", 70, 0.8, 1);
+CALL InsertGrain("Barley", 110, 1, 1);
+CALL InsertGrain("Quinoa", 150, 1.5, 1);
+
+-- Insert countable (name, quantity, Farms_id)
+-- Insert crop (germination_rate, growth_percentage, growth_per_day,CropStates_id)
+CALL InsertCountable("Corn Crop",80,1);
+CALL InsertCrop(0.8,0,0.1,2);
+CALL InsertCountable("Wheat Crop",40,1);
+CALL InsertCrop(0.7,0,0.2,2);
 
 -- Insert purchasable (name, quantity, price_per_unit, Farms_id)
 -- Insert product (sell_price, rotten_percentage, rot_per_day)
-CALL InsertPurchasable("Corn",100,1,1);
+CALL InsertPurchasable("Corn Product",100,1,1);
 CALL InsertProduct(2,0,0.5);
+
+-- Insert tool (wear_and_tear_percentage, wear_and_tear_per_day)
+CALL InsertPurchasable("Tractor",2,20000,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Harvester",1,10000,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Plow",2,5000,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Disc Harrow",1,4000,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Seeder",5,15000,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Wheelbarrow",2,100,1);
+CALL InsertTool(0,1);
+CALL InsertPurchasable("Shovel",3,35,1);
+CALL InsertTool(20,0.5);
+CALL InsertPurchasable("Pitchfork",1,50,1);
+CALL InsertTool(0,2);
+
+-- Insert AnimalFood (p_name, p_quantity,p_Farms_id, production_rate_per_day, Units_id)
+CALL InsertAnimalFood("Milk",0,1,5,GetUnitID("gallons"));
+CALL InsertAnimalFood("Eggs",0,1,10,GetUnitID("units"));
+CALL InsertAnimalFood("Honey",0,1,0.25,GetUnitID("pounds"));
+
+-- Insert AnimalFeed 
+-- (p_name, p_quantity,p_price_per_unit, p_Farms_id, consumption_rate_per_day, Units_id)
+CALL InsertAnimalFeed("Hay",2000,0.15,1,40,GetUnitID("pounds"));
+CALL InsertAnimalFeed("Layer Pellets",500,0.35,1,0.25,GetUnitID("pounds"));
+CALL InsertAnimalFeed("Sugar Syrup",10,0.5,1,0.1,GetUnitID("pounds"));
+
+-- Insert purchasable (name, quantity, price_per_unit, Farms_id)
+-- Insert Animal (Purchasable_id, AnimalFood_id, AnimalFeed_id, AnimalType_id)
+CALL InsertPurchasable("Cows",3,1800,1);
+CALL InsertAnimal(LAST_INSERT_ID(),1,1,GetAnimalTypeId("Cattle"));
+CALL InsertPurchasable("Chikens",20,8,1);
+CALL InsertAnimal(LAST_INSERT_ID(),2,2,GetAnimalTypeId("Chickens"));
+CALL InsertPurchasable("Bee Hive",2,300,1);
+CALL InsertAnimal(LAST_INSERT_ID(),3,3,GetAnimalTypeId("Bees"));
+
+
+
+
+
