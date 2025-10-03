@@ -14,7 +14,6 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
 
 
-
     }
 
     /* This method is just an example of the functionality in the code.
