@@ -48,7 +48,7 @@ public class Product extends Purchasable {
         return this.sellPrice;
     }
 
-    @Override
+//    @Override
     public void passTime(int days) {
         if (this.getQuantity() > 0) {
             float newRot = this.rottenPercentage + this.rotPerDay * days;
@@ -59,9 +59,9 @@ public class Product extends Purchasable {
         }
     }
 
-    @Override
-    public void addToFarm(Farm farm) {
-        farm.addProduct(this);
-    }
+//    @Override
+//    public void addToFarm(Farm farm) {
+//        farm.addProduct(this);
+//    }
 
 }

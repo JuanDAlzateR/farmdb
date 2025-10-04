@@ -20,4 +20,13 @@ public enum Currency {
     public String getAbbreviation() {
         return abbreviation;
     }
+
+    public static Currency fromAbbreviation(String abbreviation) {
+        for (Currency currency : Currency.values()) {
+            if (currency.abbreviation.equalsIgnoreCase(abbreviation)) {
+                return currency;
+            }
+        }
+        throw new IllegalArgumentException("No currency found with abbreviation: " + abbreviation);
+    }
 }

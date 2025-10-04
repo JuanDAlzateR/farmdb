@@ -4,6 +4,7 @@ public abstract class Countable {
 
     private float quantity;
     private String name;
+    private int farmId;
 
     public Countable(String name, float quantity) {
         this.name = name;
