@@ -9,11 +9,11 @@ USE farmdb;
 CREATE TABLE Currency (
     id tinyint UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20),
-    abreviation VARCHAR(3)
+    abbreviation VARCHAR(3)
 );
 
 INSERT INTO
-    Currency (name, abreviation)
+    Currency (name, abbreviation)
 VALUES
     ("dolars", "USD"),
     ("euros", "EUR"),
@@ -160,18 +160,15 @@ INSERT INTO
     Units (unit, abreviation)
 VALUES
     ("each", "EA"),
-    -- 1
     ("units", "UN"),
     ("pieces", "PC"),
     ("kilograms", "kg"),
     ("grams", "g"),
-    -- 5
     ("milligrams", "mg"),
     ("tons", "t"),
     ("pounds", "lb"),
     ("ounces", "oz"),
     ("liters", "L"),
-    -- 10
     ("milliliters", "mL"),
     ("gallons", "gal"),
     ("pints", "pt"),
