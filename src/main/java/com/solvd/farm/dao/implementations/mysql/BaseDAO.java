@@ -11,9 +11,9 @@ public abstract class BaseDAO {
         this.cp=ConnectionPool.getInstance();
     }
     protected Connection getConnection(){
-
+        return cp.getConnection();
     }
     protected void releaseConnection(Connection connection){
-
+        cp.releaseConnection(connection);
     }
 }

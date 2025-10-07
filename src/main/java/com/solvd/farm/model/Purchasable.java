@@ -35,4 +35,9 @@ public abstract class Purchasable extends Countable {
     public Currency getCurrency() {
         return this.currency;
     }
+
+    public void setPurchasable(float pricePerUnit, String currencyAbbreviation) {
+        this.pricePerUnit=pricePerUnit;
+        this.currency=Currency.fromAbbreviation(currencyAbbreviation);
+    }
 }

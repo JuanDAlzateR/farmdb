@@ -10,8 +10,8 @@ public class ConnectionPool {
 
     // --- DB configuration ---
     private static final String URL = "jdbc:mysql://localhost:3306/farmdb";
-    private static final String USER = "your_user";
-    private static final String PASSWORD = "your_password";
+    private static final String USER = "user";
+    private static final String PASSWORD = "password";
     private static final int INITIAL_POOL_SIZE = 5;
     private static final int MAX_POOL_SIZE = 10;
     // -------------------------------------------------------------------
@@ -23,8 +23,15 @@ public class ConnectionPool {
     private List<Connection> availableConnections = new LinkedList<>();
     private List<Connection> usedConnections = new LinkedList<>();
 
-    //Private constructor, to avoid extaernal instance (Singleton)
+    //Private constructor, to avoid external instance (Singleton)
     private ConnectionPool() {
+        // Run static block in Driver class, just once, before create a connection
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         // Initialize pool
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
             availableConnections.add(createConnection());
@@ -45,7 +52,7 @@ public class ConnectionPool {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException("Error al crear la conexión a la base de datos.", e);
+            throw new RuntimeException("Error trying to create the data base connection.", e);
         }
     }
 
@@ -53,14 +60,14 @@ public class ConnectionPool {
      * Returns a pool connection
      */
     public synchronized Connection getConnection() {
-        // If there is an avaiable connection, it returns it.
+        // If there is an available connection, it returns it.
         if (!availableConnections.isEmpty()) {
             Connection connection = availableConnections.remove(0);
             usedConnections.add(connection);
             return connection;
         }
 
-        // If there are not avaiable connections, it creates a new one if the max isn't reached.
+        // If there are no available connections, it creates a new one if the max isn't reached.
         if (usedConnections.size() < MAX_POOL_SIZE) {
             Connection connection = createConnection();
             usedConnections.add(connection);
@@ -68,7 +75,7 @@ public class ConnectionPool {
         }
 
         // If the max it's reached, returns an exception
-        throw new RuntimeException("Límite máximo del pool de conexiones alcanzado.");
+        throw new RuntimeException("Max limit of pool connections reached.");
     }
 
     public synchronized boolean releaseConnection(Connection connection) {
