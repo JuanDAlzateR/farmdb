@@ -3,7 +3,7 @@ package com.solvd.farm.model;
 public abstract class Purchasable extends Countable {
 
     private float pricePerUnit;
-    private Currency currency= Currency.USD;
+    private Currency currency = Currency.USD;
 
     public Purchasable() {
         super("New name", 0);
@@ -34,5 +34,10 @@ public abstract class Purchasable extends Countable {
 
     public Currency getCurrency() {
         return this.currency;
+    }
+
+    public void setPurchasable(float pricePerUnit, String currencyAbbreviation) {
+        this.pricePerUnit = pricePerUnit;
+        this.currency = Currency.fromAbbreviation(currencyAbbreviation);
     }
 }

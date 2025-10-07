@@ -47,4 +47,4 @@ public enum AnimalType {
         }
         throw new IllegalArgumentException("No unit found with subcategory: " + subcategory);
     }
-    }
+}

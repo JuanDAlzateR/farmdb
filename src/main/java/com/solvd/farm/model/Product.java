@@ -7,7 +7,7 @@ public class Product extends Purchasable {
     private float sellPrice;
 
     public Product() {
-        super("New crops.Product", 0);
+        super("New Product", 0);
         this.rottenPercentage = 0;
         this.rotPerDay = 5F;
     }
@@ -17,6 +17,12 @@ public class Product extends Purchasable {
         this.rottenPercentage = 0;
         this.rotPerDay = 2F;
         crop.setQuantity(0);
+    }
+
+    public Product(float sellPrice, float rottenPercentage, float rotPerDay) {
+        this.rottenPercentage = rottenPercentage;
+        this.rotPerDay = rotPerDay;
+        this.sellPrice = sellPrice;
     }
 
     @Override
@@ -48,7 +54,7 @@ public class Product extends Purchasable {
         return this.sellPrice;
     }
 
-//    @Override
+    //    @Override
     public void passTime(int days) {
         if (this.getQuantity() > 0) {
             float newRot = this.rottenPercentage + this.rotPerDay * days;

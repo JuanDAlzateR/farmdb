@@ -7,13 +7,15 @@ import java.sql.Connection;
 public abstract class BaseDAO {
     protected final ConnectionPool cp;
 
-    protected BaseDAO(){
-        this.cp=ConnectionPool.getInstance();
+    protected BaseDAO() {
+        this.cp = ConnectionPool.getInstance();
     }
-    protected Connection getConnection(){
 
+    protected Connection getConnection() {
+        return cp.getConnection();
     }
-    protected void releaseConnection(Connection connection){
 
+    protected void releaseConnection(Connection connection) {
+        cp.releaseConnection(connection);
     }
 }

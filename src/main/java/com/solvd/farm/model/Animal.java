@@ -17,7 +17,7 @@ public abstract class Animal extends Purchasable {
         super(name, quantity);
         this.animalFood = animalFood;
         this.animalFeed = animalFeed;
-        this.animalType=animalType;
+        this.animalType = animalType;
     }
 
     @Override

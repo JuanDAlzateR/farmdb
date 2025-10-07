@@ -31,4 +31,17 @@ public abstract class Countable {
         return this.name;
     }
 
+    public int getFarmId() {
+        return farmId;
+    }
+
+    public void setFarmId(int farmId) {
+        this.farmId = farmId;
+    }
+
+    public void setCountable(String name, float quantity, int farmId) {
+        this.name = name;
+        this.quantity = quantity;
+        this.farmId = farmId;
+    }
 }

@@ -14,10 +14,10 @@ public class BankAccount {
     private Currency currency;
 
     public BankAccount(String bankName, String accountNumber, Float balance) {
-        this.bankName=bankName;
-        this.accountNumber=accountNumber;
-        this.balance=balance;
-        this.currency=Currency.USD;
+        this.bankName = bankName;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.currency = Currency.USD;
 
     }
 
