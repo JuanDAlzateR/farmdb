@@ -69,7 +69,7 @@ public class Crop extends Countable {
         this.cropState = this.cropState.next();
     }
 
-    @Override
+
     public void passTime(int days) {
         if (this.getQuantity() > 0) {
             float newGrowth = this.growthPercentage + this.growthPerDay * days;
@@ -85,7 +85,7 @@ public class Crop extends Countable {
         }
     }
 
-    public void addToFarm(Farm farm) {
-        farm.addCrop(this);
-    }
+//    public void addToFarm(Farm farm) {
+//        farm.addCrop(this);
+//    }
 }

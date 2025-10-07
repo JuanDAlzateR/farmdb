@@ -1,4 +1,4 @@
-package com.solvd.farm.dao.implementations.mysql;
+package com.solvd.farm.dao.impl.mysql;
 
 import com.solvd.farm.util.ConnectionPool;
 
