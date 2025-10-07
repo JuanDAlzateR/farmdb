@@ -1,8 +1,8 @@
-package com.solvd.farm.dao.interfaces;
+package com.solvd.farm.service.interfaces;
 
 import com.solvd.farm.model.Product;
 
-public interface IProductDAO {
+public interface IProductService {
     void save(Product product);
 
     Product getProductById(int id);

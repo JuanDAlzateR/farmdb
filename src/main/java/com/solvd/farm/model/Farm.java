@@ -64,9 +64,9 @@ public class Farm {
         return longitude;
     }
 
-    public void displayWeather() {
-        Weather.WEATHER.getWeather(latitude, longitude);
-    }
+//    public void displayWeather() {
+//        Weather.WEATHER.getWeather(latitude, longitude);
+//    }
 
 //    public WeatherThread weatherTread(int seconds) {
 //        WeatherTask weatherTask=new WeatherTask(latitude,longitude,seconds);
@@ -90,7 +90,6 @@ public class Farm {
 //        animalSet.passTime(days);
 //    }
 //
-
 
 
 }

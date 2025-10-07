@@ -42,6 +42,6 @@ public abstract class Countable {
     public void setCountable(String name, float quantity, int farmId) {
         this.name = name;
         this.quantity = quantity;
-        this.farmId =farmId;
+        this.farmId = farmId;
     }
 }

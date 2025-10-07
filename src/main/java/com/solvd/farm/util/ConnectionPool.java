@@ -10,8 +10,8 @@ public class ConnectionPool {
 
     // --- DB configuration ---
     private static final String URL = "jdbc:mysql://localhost:3306/farmdb";
-    private static final String USER = "user";
-    private static final String PASSWORD = "password";
+    private static final String USER = "farm_user";
+    private static final String PASSWORD = "farm.0000";
     private static final int INITIAL_POOL_SIZE = 5;
     private static final int MAX_POOL_SIZE = 10;
     // -------------------------------------------------------------------
