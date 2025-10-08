@@ -1,7 +1,9 @@
 package com.solvd.farm;
 
+import com.solvd.farm.model.Countable;
 import com.solvd.farm.model.Product;
 import com.solvd.farm.model.Tool;
+import com.solvd.farm.service.impl.CountableService;
 import com.solvd.farm.service.impl.ProductService;
 import com.solvd.farm.service.impl.ToolService;
 import org.apache.logging.log4j.LogManager;
@@ -26,8 +28,7 @@ public class Main {
         product2.setCountable("Quake Product", 150, 1);
 
         productService.save(product2);
-        LOGGER.info(" ");
-        LOGGER.info("List of all products:");
+
         productService.displayAllProducts();
 
 
@@ -42,10 +43,26 @@ public class Main {
         tool2.setCountable("Big Pitchfork", 1, 1);
 
         toolService.save(tool2);
-        LOGGER.info(" ");
-        LOGGER.info("List of all tools:");
+
         toolService.displayAllTools();
 
+        CountableService countableService = new CountableService();
+
+        Countable countable = countableService.getCountableById(2);
+        LOGGER.info("countable searched with id=2:");
+        LOGGER.info(countable);
+
+        Product product3 = new Product();
+        product3.setCountable("Countable123", 123, 1);
+
+        countableService.save(product3);
+
+        countableService.displayAllCountables();
+
+        product3.setCountable("Countable333", 333, 1);
+        countableService.update(product3);
+
+        countableService.displayAllCountables();
     }
 
     /* This method is just an example of the functionality in the code.
