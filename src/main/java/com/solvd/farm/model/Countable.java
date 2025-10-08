@@ -2,6 +2,7 @@ package com.solvd.farm.model;
 
 public abstract class Countable {
 
+    private int id;
     private float quantity;
     private String name;
     private int farmId;
@@ -43,5 +44,13 @@ public abstract class Countable {
         this.name = name;
         this.quantity = quantity;
         this.farmId = farmId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

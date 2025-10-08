@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class ToolService implements IToolService {
     public static final Logger LOGGER = LogManager.getLogger(ToolService.class);
+    public final ToolDAO toolDAO = new ToolDAO();
 
     @Override
     public Tool getToolById(int id) {
-        ToolDAO toolDAO = new ToolDAO();
         Tool tool = toolDAO.getToolById(id);
         return tool;
 
@@ -25,14 +25,14 @@ public class ToolService implements IToolService {
 
     @Override
     public void save(Tool tool) {
-        ToolDAO toolDAO = new ToolDAO();
         toolDAO.save(tool);
 
     }
 
     public void displayAllTools() {
-        ToolDAO toolDAO = new ToolDAO();
         ArrayList<Tool> toolList = toolDAO.toolList();
+        LOGGER.info(" ");
+        LOGGER.info("List of all tools:");
         toolList.stream().forEach(LOGGER::info);
     }
 
