@@ -1,7 +1,9 @@
 package com.solvd.farm;
 
 import com.solvd.farm.model.Product;
+import com.solvd.farm.model.Tool;
 import com.solvd.farm.service.impl.ProductService;
+import com.solvd.farm.service.impl.ToolService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,8 +14,7 @@ public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
+
         ProductService productService = new ProductService();
 
         Product product = productService.getProductById(2);
@@ -28,6 +29,22 @@ public class Main {
         LOGGER.info(" ");
         LOGGER.info("List of all products:");
         productService.displayAllProducts();
+
+
+        ToolService toolService = new ToolService();
+
+        Tool tool = toolService.getToolById(2);
+        LOGGER.info("tool searched with id=2:");
+        LOGGER.info(tool);
+
+        Tool tool2 = new Tool(10F, 0.1F);
+        tool2.setPurchasable(75, "usd");
+        tool2.setCountable("Big Pitchfork", 1, 1);
+
+        toolService.save(tool2);
+        LOGGER.info(" ");
+        LOGGER.info("List of all tools:");
+        toolService.displayAllTools();
 
     }
 

@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 public class ProductDAO extends BaseDAO implements IProductDAO {
     public static final Logger LOGGER = LogManager.getLogger(ProductDAO.class);
+
     //-- Insert purchasable (name, quantity, price_per_unit, Farms_id)
     private final static String INSERT_PURCHASABLE_SQL = "CALL InsertPurchasable(?,?,?,?);";
+
     //-- Insert product (sell_price, rotten_percentage, rot_per_day)
     private final static String INSERT_PRODUCT_SQL = "CALL InsertProduct(?,?,?);";
 
@@ -43,7 +45,7 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
             cs1.setString(1, product.getName());
             cs1.setFloat(2, product.getQuantity());
             cs1.setFloat(3, product.getPrice());
-            cs1.setFloat(4, product.getFarmId());
+            cs1.setInt(4, product.getFarmId());
 
             cs2 = connection.prepareCall(INSERT_PRODUCT_SQL);
             cs2.setFloat(1, product.getSellPrice());
@@ -114,20 +116,7 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
             rs = ps.executeQuery();
             rs.next();
 
-            String name = rs.getString("name");
-            float quantity = rs.getFloat("quantity");
-            int farmId = rs.getInt("Farms_id");
-            float pricePerUnit = rs.getFloat("price_per_unit");
-            float rottenPercentage = rs.getFloat("rotten_percentage");
-            float rotPerDay = rs.getFloat("rot_per_day");
-            float sellPrice = rs.getFloat("sell_price");
-            String abbreviation = rs.getString("currency");
-
-            Product product = new Product(sellPrice, rottenPercentage, rotPerDay);
-            product.setPurchasable(pricePerUnit, abbreviation);
-            product.setCountable(name, quantity, farmId);
-
-            return product;
+            return productFromRS(rs);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -141,6 +130,25 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
             releaseConnection(connection);
 
         }
+    }
+
+    private Product productFromRS(ResultSet rs) throws SQLException {
+
+        String name = rs.getString("name");
+        float quantity = rs.getFloat("quantity");
+        int farmId = rs.getInt("Farms_id");
+        float pricePerUnit = rs.getFloat("price_per_unit");
+        float rottenPercentage = rs.getFloat("rotten_percentage");
+        float rotPerDay = rs.getFloat("rot_per_day");
+        float sellPrice = rs.getFloat("sell_price");
+        String abbreviation = rs.getString("currency");
+
+        Product product = new Product(sellPrice, rottenPercentage, rotPerDay);
+        product.setPurchasable(pricePerUnit, abbreviation);
+        product.setCountable(name, quantity, farmId);
+
+        return product;
+
     }
 
     public ArrayList<Product> productList() {
@@ -158,20 +166,7 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                String name = rs.getString("name");
-                float quantity = rs.getFloat("quantity");
-                int farmId = rs.getInt("Farms_id");
-                float pricePerUnit = rs.getFloat("price_per_unit");
-                float rottenPercentage = rs.getFloat("rotten_percentage");
-                float rotPerDay = rs.getFloat("rot_per_day");
-                float sellPrice = rs.getFloat("sell_price");
-                String abbreviation = rs.getString("currency");
-
-                Product product = new Product(sellPrice, rottenPercentage, rotPerDay);
-                product.setPurchasable(pricePerUnit, abbreviation);
-                product.setCountable(name, quantity, farmId);
-
-                productList.add(product);
+                productList.add(productFromRS(rs));
             }
 
         } catch (Exception e) {
@@ -189,19 +184,6 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
     }
 
     private void setProductStatement(Product p, PreparedStatement ps) throws SQLException {
-        //-- Insert purchasable (name, quantity, price_per_unit, Farms_id)
-        //-- Insert product (sell_price, rotten_percentage, rot_per_day)
-        ps.setString(1, p.getName());
-        ps.setFloat(2, p.getQuantity());
-        ps.setFloat(3, p.getPrice());
-        ps.setInt(4, p.getFarmId());
-        ps.setFloat(5, p.getSellPrice());
-        ps.setFloat(6, p.getRottenPercentage());
-        ps.setFloat(7, p.getRottenPerDay());
-
-    }
-
-    private void getProductStatement(Product p, PreparedStatement ps) throws SQLException {
         //-- Insert purchasable (name, quantity, price_per_unit, Farms_id)
         //-- Insert product (sell_price, rotten_percentage, rot_per_day)
         ps.setString(1, p.getName());

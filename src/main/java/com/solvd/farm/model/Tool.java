@@ -17,12 +17,18 @@ public class Tool extends Purchasable {
         this.wearAndTearPerDay = 0.1F;
     }
 
+    public Tool(float wearAndTearPercentage, float wearAndTearPerDay) {
+        super();
+        this.wearAndTearPercentage = wearAndTearPercentage;
+        this.wearAndTearPerDay = wearAndTearPerDay;
+    }
+
     @Override
     public String toString() {
         return (this.getName() + " | " + this.wearAndTearPercentage + "% of wear and tear");
     }
 
-    public void setRottenPercentage(Float Percentage) {
+    public void setWearAndTearPercentage(Float Percentage) {
         this.wearAndTearPercentage = Percentage;
     }
 
@@ -30,11 +36,11 @@ public class Tool extends Purchasable {
         this.wearAndTearPerDay = wearAndTearPerDay;
     }
 
-    public float getRottenPercentage() {
+    public float getWearAndTearPercentage() {
         return this.wearAndTearPercentage;
     }
 
-    public float getRottenPerDay() {
+    public float getWearAndTearPerDay() {
         return this.wearAndTearPerDay;
     }
 
