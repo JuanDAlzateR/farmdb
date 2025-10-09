@@ -2,9 +2,11 @@ package com.solvd.farm;
 
 import com.solvd.farm.model.Countable;
 import com.solvd.farm.model.Product;
+import com.solvd.farm.model.Purchasable;
 import com.solvd.farm.model.Tool;
 import com.solvd.farm.service.impl.CountableService;
 import com.solvd.farm.service.impl.ProductService;
+import com.solvd.farm.service.impl.PurchasableService;
 import com.solvd.farm.service.impl.ToolService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,8 +31,6 @@ public class Main {
 
         productService.save(product2);
 
-        productService.displayAllProducts();
-
 
         ToolService toolService = new ToolService();
 
@@ -44,7 +44,6 @@ public class Main {
 
         toolService.save(tool2);
 
-        toolService.displayAllTools();
 
         CountableService countableService = new CountableService();
 
@@ -57,12 +56,31 @@ public class Main {
 
         countableService.save(product3);
 
-        countableService.displayAllCountables();
-
         product3.setCountable("Countable333", 333, 1);
         countableService.update(product3);
 
         countableService.displayAllCountables();
+
+
+        PurchasableService purchasableService = new PurchasableService();
+
+        Purchasable purchasable = purchasableService.getPurchasableById(3);
+        LOGGER.info("purchasable searched with id=3:");
+        LOGGER.info(purchasable);
+
+        Product product4 = new Product();
+        product4.setCountable("Purchasable456", 456, 1);
+        product4.setPurchasable(5, "usd");
+
+        purchasableService.save(product4);
+
+        product4.setPurchasable(6, "eur");
+        product4.setCountable("Purchasable777", 500, 1);
+        purchasableService.update(product4);
+
+        purchasableService.displayAllPurchasables();
+
+
     }
 
     /* This method is just an example of the functionality in the code.
