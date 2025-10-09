@@ -1,7 +1,6 @@
 package com.solvd.farm.dao.impl.mysql;
 
 import com.solvd.farm.dao.interfaces.ICountableDAO;
-import com.solvd.farm.dao.interfaces.IProductDAO;
 import com.solvd.farm.model.Countable;
 import com.solvd.farm.model.Product;
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +52,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 int newId = rs.getInt(1);
-                countable.setId(newId);
+                countable.setCountableId(newId);
             }
 
         } catch (Exception e) {
@@ -116,8 +115,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
         int id = rs.getInt("id");
 
         Product product = new Product();
-        product.setCountable(name, quantity, farmId);
-        product.setId(id);
+        product.setCountable(id, name, quantity, farmId);
 
         return product;
     }

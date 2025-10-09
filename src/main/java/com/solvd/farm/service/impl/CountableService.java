@@ -2,11 +2,8 @@ package com.solvd.farm.service.impl;
 
 
 import com.solvd.farm.dao.impl.mysql.CountableDAO;
-import com.solvd.farm.dao.impl.mysql.ToolDAO;
 import com.solvd.farm.model.Countable;
-import com.solvd.farm.model.Tool;
 import com.solvd.farm.service.interfaces.ICountableService;
-import com.solvd.farm.service.interfaces.IToolService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +29,7 @@ public class CountableService implements ICountableService {
 
     @Override
     public void update(Countable c) {
-        countableDAO.update(c.getId(), c.getName(), c.getQuantity(), c.getFarmId());
+        countableDAO.update(c.getCountableId(), c.getName(), c.getQuantity(), c.getFarmId());
 
     }
 
