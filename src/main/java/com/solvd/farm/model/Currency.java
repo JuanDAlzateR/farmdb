@@ -1,14 +1,16 @@
 package com.solvd.farm.model;
 
 public enum Currency {
-    USD("dolars", "USD"),
-    EUR("euros", "EUR"),
-    COP("colombian pesos", "COP");
+    USD(1, "dolars", "USD"),
+    EUR(2, "euros", "EUR"),
+    COP(3, "colombian pesos", "COP");
 
+    private final int id;
     private final String name;
     private final String abbreviation;
 
-    Currency(String name, String abbreviation) {
+    Currency(int id, String name, String abbreviation) {
+        this.id = id;
         this.name = name;
         this.abbreviation = abbreviation;
     }
@@ -28,5 +30,14 @@ public enum Currency {
             }
         }
         throw new IllegalArgumentException("No currency found with abbreviation: " + abbreviation);
+    }
+
+    public static Currency fromId(int id) {
+        for (Currency currency : Currency.values()) {
+            if (currency.id == id) {
+                return currency;
+            }
+        }
+        throw new IllegalArgumentException("No currency found with id: " + id);
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bankAccounts>
+
+	<account>
+		<bank_name>Bancolombia</bank_name>
+		<balance>100000.00</balance>
+		<nickname>NULL</nickname>
+		<account_number>1234</account_number>
+		<Currency_id>3</Currency_id>
+	</account>
+
+	<account>
+		<bank_name>Bank ABC</bank_name>
+		<balance>0.00</balance>
+		<nickname>NULL</nickname>
+		<account_number>1111</account_number>
+		<Currency_id>1</Currency_id>
+	</account>
+
+	<account>
+		<bank_name>Bank ABC</bank_name>
+		<balance>1500.00</balance>
+		<nickname>NULL</nickname>
+		<account_number>2222</account_number>
+		<Currency_id>1</Currency_id>
+	</account>
+
+	<account>
+		<bank_name>France Bank</bank_name>
+		<balance>3000.00</balance>
+		<nickname>NULL</nickname>
+		<account_number>123456</account_number>
+		<Currency_id>2</Currency_id>
+	</account>
+</bankAccounts>

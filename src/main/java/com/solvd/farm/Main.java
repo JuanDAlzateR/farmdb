@@ -24,6 +24,11 @@ public class Main {
         LOGGER.info("");
         //unitDOMService.displayAllUnits();
 
+        BankAccountDOMService bankDOMService = new BankAccountDOMService();
+
+        bankDOMService.displayAllBankAccounts();
+        LOGGER.info("");
+
     }
 
     private static void useServices() {
