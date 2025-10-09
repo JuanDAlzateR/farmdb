@@ -1,13 +1,7 @@
 package com.solvd.farm;
 
-import com.solvd.farm.model.Countable;
-import com.solvd.farm.model.Product;
-import com.solvd.farm.model.Purchasable;
-import com.solvd.farm.model.Tool;
-import com.solvd.farm.service.impl.CountableService;
-import com.solvd.farm.service.impl.ProductService;
-import com.solvd.farm.service.impl.PurchasableService;
-import com.solvd.farm.service.impl.ToolService;
+import com.solvd.farm.model.*;
+import com.solvd.farm.service.impl.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,11 +13,27 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Services from DAO
+        useServices();
+
+        //Services from DOM
+        UnitDOMService unitDOMService = new UnitDOMService();
+
+        LOGGER.info("unit with id=3");
+        LOGGER.info(unitDOMService.getUnitById(3));
+        LOGGER.info("");
+        //unitDOMService.displayAllUnits();
+
+    }
+
+    private static void useServices() {
+
+        //-------------ProductService
         ProductService productService = new ProductService();
 
-        Product product = productService.getProductById(2);
         LOGGER.info("product searched with id=2:");
-        LOGGER.info(product);
+        LOGGER.info(productService.getProductById(2));
+        LOGGER.info("");
 
         Product product2 = new Product(5F, 0F, 0.8F);
         product2.setPurchasable(4, "usd");
@@ -31,26 +41,24 @@ public class Main {
 
         productService.save(product2);
 
-
+        //-------------ToolService
         ToolService toolService = new ToolService();
 
-        Tool tool = toolService.getToolById(2);
         LOGGER.info("tool searched with id=2:");
-        LOGGER.info(tool);
-
+        LOGGER.info(toolService.getToolById(2));
+        LOGGER.info("");
         Tool tool2 = new Tool(10F, 0.1F);
         tool2.setPurchasable(75, "usd");
         tool2.setCountable("Big Pitchfork", 1, 1);
 
         toolService.save(tool2);
 
-
+        //-------------CountableService
         CountableService countableService = new CountableService();
 
-        Countable countable = countableService.getCountableById(2);
         LOGGER.info("countable searched with id=2:");
-        LOGGER.info(countable);
-
+        LOGGER.info(countableService.getCountableById(2));
+        LOGGER.info("");
         Product product3 = new Product();
         product3.setCountable("Countable123", 123, 1);
 
@@ -59,15 +67,15 @@ public class Main {
         product3.setCountable("Countable333", 333, 1);
         countableService.update(product3);
 
-        countableService.displayAllCountables();
-
+        //countableService.displayAllCountables();
 
         PurchasableService purchasableService = new PurchasableService();
 
-        Purchasable purchasable = purchasableService.getPurchasableById(3);
-        LOGGER.info("purchasable searched with id=3:");
-        LOGGER.info(purchasable);
+        //-------------PurchasableService
 
+        LOGGER.info("purchasable searched with id=3:");
+        LOGGER.info(purchasableService.getPurchasableById(3));
+        LOGGER.info("");
         Product product4 = new Product();
         product4.setCountable("Purchasable456", 456, 1);
         product4.setPurchasable(5, "usd");
@@ -78,13 +86,7 @@ public class Main {
         product4.setCountable("Purchasable777", 500, 1);
         purchasableService.update(product4);
 
-        purchasableService.displayAllPurchasables();
-
-
+        //purchasableService.displayAllPurchasables();
     }
-
-    /* This method is just an example of the functionality in the code.
-    It can be called in the main menu as EXAMPLE: TEST FARM METHODS
-     */
 
 }

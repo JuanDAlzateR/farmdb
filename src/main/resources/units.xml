@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<units>
+    <unitOfMeasure id="1">
+        <unit>kilogram</unit>
+        <abbreviation>kg</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="2">
+        <unit>gram</unit>
+        <abbreviation>g</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="3">
+        <unit>milligram</unit>
+        <abbreviation>mg</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="4">
+        <unit>ton</unit>
+        <abbreviation>t</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="5">
+        <unit>pound</unit>
+        <abbreviation>lb</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="6">
+        <unit>ounce</unit>
+        <abbreviation>oz</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="7">
+        <unit>liter</unit>
+        <abbreviation>L</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="8">
+        <unit>milliliter</unit>
+        <abbreviation>mL</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="9">
+        <unit>gallon</unit>
+        <abbreviation>gal</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="10">
+        <unit>pint</unit>
+        <abbreviation>pt</abbreviation>
+    </unitOfMeasure>
+    <unitOfMeasure id="11">
+        <unit>quart</unit>
+        <abbreviation>qt</abbreviation>
+    </unitOfMeasure>
+</units>
