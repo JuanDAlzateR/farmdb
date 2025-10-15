@@ -24,9 +24,9 @@ public class Main {
         LOGGER.info("");
         //unitDOMService.displayAllUnits();
 
-        BankAccountDOMService bankDOMService = new BankAccountDOMService();
+        BankAccountJAXBService bankJAXBService = new BankAccountJAXBService();
 
-        bankDOMService.displayAllBankAccounts();
+        bankJAXBService.displayAllBankAccounts();
         LOGGER.info("");
 
     }

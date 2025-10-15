@@ -23,6 +23,22 @@ public class BankAccountList {
     // JAXB needs a constructor without parameters
     public BankAccountList() {}
 
+    /* Looks in the array for the corresponding bankAccount
+       If it doesn't find it, it returns null  */
+    public BankAccount getBankAccountByKey(String bankName, String accountNumber) {
+        int n=IntStream.range(0, bankAccounts.size())
+                .filter((i) -> bankAccounts.get(i).getAccountNumber() == accountNumber)
+                .filter((i) -> bankAccounts.get(i).getBankName() == bankName)
+                .findFirst()
+                .orElse(-1);
+        if (n>-1) {
+            return bankAccounts.get(n);
+        }
+        return null;
+
+    }
+
+
     /* Looks in the array for the index of item with that name
         If it doesn't find it, it returns -1  */
 

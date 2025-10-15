@@ -10,24 +10,21 @@ import java.util.List;
 public class BankAccountJAXBParser {
 
     private static String filePath = "src/main/resources/bankaccounts.xml";
+    private static BankAccountList bankAccountList;
 
-    public static BankAccountList getBankAccountList(String xmlFilePath) {
-        try {
-            // create context using root class
-            JAXBContext context = JAXBContext.newInstance(BankAccountList.class);
+    public BankAccountJAXBParser(){
+        this.bankAccountList=JAXBParser.parse(BankAccountList.class, filePath);
+    }
 
-            // Create Unmarshaller (XML reader)
-            Unmarshaller unmarshaller = context.createUnmarshaller();
+    public static BankAccountList getBankAccountList() {
+        return  bankAccountList;
+    }
 
-            // Read file and cast to root object
-            File xmlFile = new File(filePath);
-            BankAccountList bankAccountList = (BankAccountList) unmarshaller.unmarshal(xmlFile);
+    public static BankAccount getBankAccountByKey(String bankName, String accountNumber) {
+        return  bankAccountList.getBankAccountByKey(bankName,accountNumber);
+    }
 
-            return bankAccountList;
-
-        } catch (jakarta.xml.bind.JAXBException e) {
-
-            throw new RuntimeException("JAXB parsing error: ", e);
-        }
+    public void reloadBankAccountList() {
+        this.bankAccountList=JAXBParser.parse(BankAccountList.class, filePath);
     }
 }
