@@ -25,6 +25,8 @@
         <commonsLang3Version>3.18.0</commonsLang3Version>
         <jacksonVersion>2.17.1</jacksonVersion>
         <mysqlconnectorVersion>9.2.0</mysqlconnectorVersion>
+        <jaxbJakartaAPIVersion>4.0.4</jaxbJakartaAPIVersion>
+        <jaxbRuntimeVersion>4.0.5</jaxbRuntimeVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -65,6 +67,19 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>${mysqlconnectorVersion}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>${jaxbJakartaAPIVersion}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${jaxbRuntimeVersion}</version>
+        </dependency>
+
     </dependencies>
 
 <!-- Plugins -->
