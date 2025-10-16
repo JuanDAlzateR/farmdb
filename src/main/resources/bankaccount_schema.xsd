@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="bankAccounts">
+        <xs:complexType>
+            <xs:sequence>
+
+                <xs:element name="account" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="bank_name" type="xs:string"/>
+                            <xs:element name="balance" type="xs:decimal"/>
+                            <xs:element name="nickname" type="xs:string"/>
+                            <xs:element name="account_number" type="xs:string"/>
+                            <xs:element name="Currency_id" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

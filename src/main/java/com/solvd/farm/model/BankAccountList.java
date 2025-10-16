@@ -21,17 +21,18 @@ public class BankAccountList {
     int defaultAccountIndex = 0;
 
     // JAXB needs a constructor without parameters
-    public BankAccountList() {}
+    public BankAccountList() {
+    }
 
     /* Looks in the array for the corresponding bankAccount
        If it doesn't find it, it returns null  */
     public BankAccount getBankAccountByKey(String bankName, String accountNumber) {
-        int n=IntStream.range(0, bankAccounts.size())
-                .filter((i) -> bankAccounts.get(i).getAccountNumber() == accountNumber)
-                .filter((i) -> bankAccounts.get(i).getBankName() == bankName)
+        int n = IntStream.range(0, bankAccounts.size())
+                .filter((i) -> bankAccounts.get(i).getAccountNumber().equals(accountNumber))
+                .filter((i) -> bankAccounts.get(i).getBankName().equals(bankName))
                 .findFirst()
                 .orElse(-1);
-        if (n>-1) {
+        if (n > -1) {
             return bankAccounts.get(n);
         }
         return null;
@@ -44,7 +45,7 @@ public class BankAccountList {
 
     public int indexOf(String accountNumber) {
         return IntStream.range(0, bankAccounts.size())
-                .filter((i) -> bankAccounts.get(i).getAccountNumber() == accountNumber)
+                .filter((i) -> bankAccounts.get(i).getAccountNumber().equals(accountNumber))
                 .findFirst()
                 .orElse(-1);
 
@@ -78,21 +79,8 @@ public class BankAccountList {
 
     public void displayWithBalance() {
         LOGGER.info("");
-        LOGGER.info("list of all bank accounts");
-
-        IntStream.range(0, this.bankAccounts.size())
-                .forEach(i -> {
-                    String accountNumber = this.bankAccounts.get(i).getAccountNumber();
-                    String bankName = this.bankAccounts.get(i).getBankName();
-                    float balance = this.bankAccounts.get(i).getBalance();
-                    if (i == this.defaultAccountIndex) {
-                        LOGGER.info("\t" + i + ") " + bankName + " - Account #: " + accountNumber +
-                                "- Balance: " + balance + " (Default Account)");
-                    } else {
-                        LOGGER.info("\t" + i + ") " + bankName + " - Account #: " + accountNumber +
-                                "- Balance: " + balance);
-                    }
-                });
+        LOGGER.info("list of all bank accounts:");
+        bankAccounts.stream().forEach(LOGGER::info);
     }
 
     public ArrayList<BankAccount> getList() {
@@ -109,5 +97,9 @@ public class BankAccountList {
 
     public BankAccount setDefaultAccount() {
         return this.bankAccounts.get(this.defaultAccountIndex);
+    }
+
+    public void reloadCurrencies() {
+        bankAccounts.stream().forEach(BankAccount::reloadCurrency);
     }
 }

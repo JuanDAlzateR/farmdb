@@ -22,8 +22,8 @@ public class Main {
         LOGGER.info("unit with id=3");
         LOGGER.info(unitDOMService.getUnitById(3));
         LOGGER.info("");
-        //unitDOMService.displayAllUnits();
 
+        //Services from JAXB
         BankAccountJAXBService bankJAXBService = new BankAccountJAXBService();
 
         bankJAXBService.displayAllBankAccounts();

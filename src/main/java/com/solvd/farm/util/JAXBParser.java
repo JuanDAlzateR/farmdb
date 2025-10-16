@@ -5,17 +5,13 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 public class JAXBParser {
     public static final Logger LOGGER = LogManager.getLogger(JAXBParser.class);
 
-    public static <T> T parse(Class<T> clazz,String filePath) {
+    public static <T> T parse(Class<T> clazz, String filePath) {
         try {
             // create context using root class
             JAXBContext context = JAXBContext.newInstance(BankAccountList.class);

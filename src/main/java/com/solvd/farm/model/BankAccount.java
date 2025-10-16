@@ -21,17 +21,19 @@ public class BankAccount {
     private String accountNickname;
     @XmlElement(name = "account_number")
     private String accountNumber;
-    //@XmlElement(name = "Currency_id")
+    @XmlElement(name = "Currency_id")
+    private int currencyId;
     private Currency currency;
 
     // JAXB needs a constructor without parameters
-    public BankAccount() {}
+    public BankAccount() {
+    }
 
     public BankAccount(String bankName, String accountNumber, Float balance) {
         this.bankName = bankName;
         this.accountNumber = accountNumber;
         this.balance = balance;
-        this.currency = Currency.USD;
+        this.currency = Currency.fromId(this.currencyId);
 
     }
 
@@ -59,5 +61,9 @@ public class BankAccount {
 
     public Float getBalance() {
         return balance;
+    }
+
+    public void reloadCurrency() {
+        currency = Currency.fromId(currencyId);
     }
 }
