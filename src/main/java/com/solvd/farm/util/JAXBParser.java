@@ -14,7 +14,7 @@ public class JAXBParser {
     public static <T> T parse(Class<T> clazz, String filePath) {
         try {
             // create context using root class
-            JAXBContext context = JAXBContext.newInstance(BankAccountList.class);
+            JAXBContext context = JAXBContext.newInstance(clazz);
 
             // Create Unmarshaller (XML reader)
             Unmarshaller unmarshaller = context.createUnmarshaller();
