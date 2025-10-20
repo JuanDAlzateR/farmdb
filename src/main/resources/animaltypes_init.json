@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "category": "Aquaculture",
+    "subcategory": "Fish"
+  },
+  {
+    "id": 2,
+    "category": "Aquaculture",
+    "subcategory": "Shellfish"
+  },
+  {
+    "id": 3,
+    "category": "Aquaculture",
+    "subcategory": "Undefined Aquaculture"
+  },
+  {
+    "id": 4,
+    "category": "Equines",
+    "subcategory": "Horses"
+  },
+  {
+    "id": 5,
+    "category": "Equines",
+    "subcategory": "Donkeys"
+  },
+  {
+    "id": 6,
+    "category": "Equines",
+    "subcategory": "Mules"
+  },
+  {
+    "id": 7,
+    "category": "Equines",
+    "subcategory": "Undefined Equines"
+  },
+  {
+    "id": 8,
+    "category": "Livestock",
+    "subcategory": "Cattle"
+  },
+  {
+    "id": 9,
+    "category": "Livestock",
+    "subcategory": "Pigs"
+  },
+  {
+    "id": 10,
+    "category": "Livestock",
+    "subcategory": "Sheep"
+  },
+  {
+    "id": 11,
+    "category": "Livestock",
+    "subcategory": "Goats"
+  },
+  {
+    "id": 12,
+    "category": "Livestock",
+    "subcategory": "Undefined Livestock"
+  },
+  {
+    "id": 13,
+    "category": "Poultry",
+    "subcategory": "Chickens"
+  },
+  {
+    "id": 14,
+    "category": "Poultry",
+    "subcategory": "Turkeys"
+  },
+  {
+    "id": 15,
+    "category": "Poultry",
+    "subcategory": "Ducks"
+  },
+  {
+    "id": 16,
+    "category": "Poultry",
+    "subcategory": "Geese"
+  },
+  {
+    "id": 17,
+    "category": "Poultry",
+    "subcategory": "Undefined Poultry"
+  },
+  {
+    "id": 18,
+    "category": "Others",
+    "subcategory": "Rabbits"
+  },
+  {
+    "id": 19,
+    "category": "Others",
+    "subcategory": "Bees"
+  },
+  {
+    "id": 20,
+    "category": "Others",
+    "subcategory": "Alpacas"
+  },
+  {
+    "id": 21,
+    "category": "Others",
+    "subcategory": "Undefined Others"
+  }
+]

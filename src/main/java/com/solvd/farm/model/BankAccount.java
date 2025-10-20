@@ -8,8 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 //@Displayable
-@XmlRootElement(name = "account") // Aunque no es el root del XML, es el root de la estructura
-@XmlAccessorType(XmlAccessType.FIELD) // Indica que JAXB debe usar los campos/atributos
+@XmlRootElement(name = "account") // even thought is not the root of the XML file, it's the root of the strcuture
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BankAccount {
 
     public static final Logger LOGGER = LogManager.getLogger(BankAccount.class);

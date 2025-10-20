@@ -4,7 +4,7 @@ public abstract class Animal extends Purchasable {
 
     private AnimalFood animalFood;
     private AnimalFeed animalFeed;
-    private AnimalType animalType;
+    private AnimalTypeEnum animalTypeEnum;
 
 
     public Animal() {
@@ -13,11 +13,11 @@ public abstract class Animal extends Purchasable {
         this.animalFeed = new AnimalFeed();
     }
 
-    public Animal(String name, int quantity, AnimalFood animalFood, AnimalFeed animalFeed, AnimalType animalType) {
+    public Animal(String name, int quantity, AnimalFood animalFood, AnimalFeed animalFeed, AnimalTypeEnum animalTypeEnum) {
         super(name, quantity);
         this.animalFood = animalFood;
         this.animalFeed = animalFeed;
-        this.animalType = animalType;
+        this.animalTypeEnum = animalTypeEnum;
     }
 
     @Override

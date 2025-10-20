@@ -23,7 +23,8 @@
         <log4jVersion>2.25.1</log4jVersion>
         <commonsIOVersion>2.20.0</commonsIOVersion>
         <commonsLang3Version>3.18.0</commonsLang3Version>
-        <jacksonVersion>2.17.1</jacksonVersion>
+        <jacksonDataBindVersion>2.17.1</jacksonDataBindVersion>
+        <jacksonCoreVersion>2.20.0</jacksonCoreVersion>
         <mysqlconnectorVersion>9.2.0</mysqlconnectorVersion>
         <jaxbJakartaAPIVersion>4.0.4</jaxbJakartaAPIVersion>
         <jaxbRuntimeVersion>4.0.5</jaxbRuntimeVersion>
@@ -59,7 +60,13 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jacksonVersion}</version>
+            <version>${jacksonDataBindVersion}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jacksonCoreVersion}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
