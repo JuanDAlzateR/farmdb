@@ -19,13 +19,14 @@ import java.util.ArrayList;
 public class AnimalTypeJSONParser {
     public static final Logger LOGGER = LogManager.getLogger(AnimalTypeJSONParser.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static String filePath="src/main/resources/animaltypes.json";
-    private static String initFilePath="src/main/resources/animaltypes_init.json";
+    private static String filePath = "src/main/resources/animaltypes.json";
+    private static String initFilePath = "src/main/resources/animaltypes_init.json";
     private static AnimalTypeList animalTypeList;
 
     public static AnimalTypeList getAnimalTypeList() {
         return animalTypeList;
     }
+
     public static void setAnimalTypeList(AnimalTypeList animalTypeList) {
         AnimalTypeJSONParser.animalTypeList = animalTypeList;
     }
@@ -37,13 +38,11 @@ public class AnimalTypeJSONParser {
         try {
             // StandardCopyOption.REPLACE_EXISTING allows overwriting
             Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-
-            LOGGER.info("succesfull initial load of: "+filePath);
+            deserealize();
+            LOGGER.info("succesfull initial load of: " + filePath);
 
         } catch (IOException e) {
-
             LOGGER.info("Error of initial load: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -51,10 +50,11 @@ public class AnimalTypeJSONParser {
         try {
             File jsonFile = new File(filePath);
 
-            ArrayList<AnimalType> animalTypes= MAPPER.readValue(jsonFile,new TypeReference<ArrayList<AnimalType>>(){});
+            ArrayList<AnimalType> animalTypes = MAPPER.readValue(jsonFile, new TypeReference<ArrayList<AnimalType>>() {
+            });
             AnimalTypeList newAnimalTypeList = new AnimalTypeList();
             newAnimalTypeList.setList(animalTypes);
-            animalTypeList=newAnimalTypeList;
+            animalTypeList = newAnimalTypeList;
 
             return animalTypeList;
 
@@ -68,23 +68,20 @@ public class AnimalTypeJSONParser {
 
         try {
             // writerWithDefaultPrettyPrinter() it's used to format output with indent and newlines.
-            String jsonString= MAPPER.writerWithDefaultPrettyPrinter()
+            String jsonString = MAPPER.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(typeList.getList());
 
             Path path = Paths.get(filePath);
             // Creates or overwrite4s the file.
-            Files.writeString(path,jsonString);
+            Files.writeString(path, jsonString);
 
-           LOGGER.info("updated: " + filePath);
+            LOGGER.info("updated: " + filePath);
 
         } catch (IOException e) {
-            // Manejar errores de I/O (ej. permisos, ruta no válida)
-            e.printStackTrace();
+            LOGGER.info("Error:", e);
         }
 
     }
-
-
 
 
 }

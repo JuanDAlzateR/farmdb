@@ -29,6 +29,20 @@ public class Main {
         bankJAXBService.displayAllBankAccounts();
         LOGGER.info("");
 
+        //Services from Jackson
+        AnimalTypeJSONService animalTypeJSONService = new AnimalTypeJSONService();
+
+        AnimalType animalType = animalTypeJSONService.getAnimalTypeBySubcategory("pigs");
+        LOGGER.info("info of animal type pigs");
+        LOGGER.info(animalType);
+        LOGGER.info("");
+
+        AnimalType newAnimalType = new AnimalType(22, "Others", "New Animal Type");
+        LOGGER.info("adding animal type");
+        animalTypeJSONService.addAnimalType(newAnimalType);
+        LOGGER.info(animalTypeJSONService.getAnimalTypeBySubcategory("New Animal Type"));
+        LOGGER.info("");
+
     }
 
     private static void useServices() {

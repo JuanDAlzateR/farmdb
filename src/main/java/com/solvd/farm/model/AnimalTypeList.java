@@ -1,12 +1,10 @@
 package com.solvd.farm.model;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
-
 
 public class AnimalTypeList {
 
@@ -14,7 +12,6 @@ public class AnimalTypeList {
 
 
     private ArrayList<AnimalType> animalTypes = new ArrayList<>();
-
 
     /* Looks in the array for the corresponding bankAccount
        If it doesn't find it, it returns null  */
@@ -29,7 +26,6 @@ public class AnimalTypeList {
         return null;
 
     }
-
 
     /* Looks in the array for the index of item with that name
         If it doesn't find it, it returns -1  */
@@ -61,12 +57,12 @@ public class AnimalTypeList {
 
     public void remove(int id) {
         int index = IntStream.range(0, animalTypes.size())
-                .filter((i) -> animalTypes.get(i).getId()==id)
+                .filter((i) -> animalTypes.get(i).getId() == id)
                 .findFirst()
                 .orElse(-1);
 
         if (index == -1) {
-            LOGGER.info("Error: animalType with id "+id+" doesn't exist");
+            LOGGER.info("Error: animalType with id " + id + " doesn't exist");
         } else {
             animalTypes.remove(index);
         }
@@ -76,25 +72,16 @@ public class AnimalTypeList {
         LOGGER.info("");
         LOGGER.info("list of all animal types");
 
-       animalTypes.stream()
+        animalTypes.stream()
                 .forEach(LOGGER::info);
-    }
-
-    public void display2() {
-        LOGGER.info("");
-        LOGGER.info("list of all animal types");
-
-        for (AnimalType type:animalTypes){
-            LOGGER.info(type);
-        }
     }
 
     public ArrayList<AnimalType> getList() {
         return this.animalTypes;
     }
 
-    public void setList(ArrayList<AnimalType> animalTypes){
-        this.animalTypes=animalTypes;
+    public void setList(ArrayList<AnimalType> animalTypes) {
+        this.animalTypes = animalTypes;
     }
 
 }
