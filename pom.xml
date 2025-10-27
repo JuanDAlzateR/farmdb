@@ -28,6 +28,7 @@
         <mysqlconnectorVersion>9.2.0</mysqlconnectorVersion>
         <jaxbJakartaAPIVersion>4.0.4</jaxbJakartaAPIVersion>
         <jaxbRuntimeVersion>4.0.5</jaxbRuntimeVersion>
+        <mybatisVersion>3.5.19</mybatisVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -86,7 +87,12 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>${jaxbRuntimeVersion}</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatisVersion}</version>
+        </dependency>
     </dependencies>
 
 <!-- Plugins -->
