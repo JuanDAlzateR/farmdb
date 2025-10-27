@@ -5,6 +5,7 @@ out/
 .idea/
 target/
 config/
+
 **/config.properties
 
 ### Eclipse ###
