@@ -1,6 +1,5 @@
 package com.solvd.farm.service.impl;
 
-
 import com.solvd.farm.dao.impl.mybatis.CountableDAO;
 import com.solvd.farm.model.Countable;
 import com.solvd.farm.service.interfaces.ICountableService;
@@ -8,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-
 
 public class CountableMybatisService implements ICountableService {
     public static final Logger LOGGER = LogManager.getLogger(CountableMybatisService.class);
@@ -37,7 +35,9 @@ public class CountableMybatisService implements ICountableService {
         ArrayList<Countable> countableList = countableDAO.countableList();
         LOGGER.info(" ");
         LOGGER.info("List of all countables:");
-        countableList.stream().forEach((c)->{LOGGER.info("id: "+c.getCountableId()+" name: "+c.getName()+" quantity: "+c.getQuantity()+" farmId: "+c.getFarmId());});
+        countableList.stream().forEach((c) -> {
+            LOGGER.info("id: " + c.getCountableId() + " name: " + c.getName() + " quantity: " + c.getQuantity() + " farmId: " + c.getFarmId());
+        });
     }
 
 }

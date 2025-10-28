@@ -33,12 +33,15 @@ public class Product extends Purchasable {
     public void setRottenPercentage(Float Percentage) {
         this.rottenPercentage = Percentage;
     }
+
     public void setRotPerDay(Float rotPerDay) {
         this.rotPerDay = rotPerDay;
     }
+
     public void setSellPrice(Float sellPrice) {
         this.sellPrice = sellPrice;
     }
+
     public void setProductId(int id) {
         this.productId = id;
     }
@@ -46,12 +49,15 @@ public class Product extends Purchasable {
     public float getRottenPercentage() {
         return this.rottenPercentage;
     }
+
     public float getRottenPerDay() {
         return this.rotPerDay;
     }
+
     public float getSellPrice() {
         return this.sellPrice;
     }
+
     public int getProductId() {
         return productId;
     }

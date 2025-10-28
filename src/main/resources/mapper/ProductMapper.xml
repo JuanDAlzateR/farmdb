@@ -5,36 +5,42 @@
     <!-- keyColumn: Column in Data Base. keyProperty: field in java class     -->
     <insert id="save" statementType="CALLABLE" keyColumn="id" keyProperty="productId" useGeneratedKeys="true">
     <!-- // Insert purchasable product (name, quantity, price_per_unit, Farms_id, sell_price, rotten_percentage, rot_per_day)   -->
+    <!-- Mybatis only allows one callable statement at a time   -->
     CALL InsertPurchasableProduct(#{name},#{quantity},#{pricePerUnit},#{farmId},#{sellPrice},#{rottenPercentage},#{rotPerDay});
     </insert>
 
-    <select id="getCountableById" parameterType="int" resultType="com.solvd.farm.model.Product">
-        SELECT Cble.*
-        FROM Countable Cble
-        WHERE Cble.id=#{id};
+    <select id="getProductById" parameterType="int" resultType="com.solvd.farm.model.Product">
+        SELECT P.*, Cble.name, Cble.quantity, Cble.Farms_id, Pble.price_per_unit, C.abbreviation as currency
+        FROM Products P
+        LEFT JOIN Purchasable Pble ON P.Purchasable_id = Pble.id
+        LEFT JOIN Countable Cble ON Pble.Countable_id = Cble.id
+        LEFT JOIN Currency C ON Pble.Currency_id = C.id
+        WHERE P.id=#{id};
     </select>
-
-    <update id="update" parameterType="map">
-        UPDATE Countable
-        SET name =#{name} , quantity = #{quantity}, Farms_id = #{farmId}
-        WHERE id=#{id};
-    </update>
 
     <!-- sql tags: they are templates -->
 
-    <select id="countableList" resultMap="CountableResultMap">
-        SELECT * FROM Countable;
+    <select id="productList" resultMap="ProductResultMap">
+        SELECT P.*, Cble.name, Cble.quantity, Cble.Farms_id, Pble.price_per_unit, C.abbreviation as currency
+        FROM Products P
+        LEFT JOIN Purchasable Pble ON P.Purchasable_id = Pble.id
+        LEFT JOIN Countable Cble ON Pble.Countable_id = Cble.id
+        LEFT JOIN Currency C ON Pble.Currency_id = C.id;
     </select>
 
-    <!-- We use model.Product because countable it's an abstract class. -->
-    <!-- We may change it if we need to -->
-    <resultMap id="CountableResultMap" type="com.solvd.farm.model.Product" autoMapping="false">
+
+    <resultMap id="ProductResultMap" type="com.solvd.farm.model.Product" autoMapping="false">
         <!-- Column: Column in Data Base. Property: field in java class -->
         <!-- id-->
-        <id property="countableId" column="id"/>
+        <id property="productId" column="id"/>
         <!-- other fields-->
         <result property="name" column="name"/>
         <result property="quantity" column="quantity"/>
-        <result property="farmId" column="Farms_id"/>
+        <result property="pricePerUnit" column="price_per_unit"/>
+        <result property="purchasableId" column="Purchasable_id"/>
+        <!--  currency not implemented yet -->
+        <result property="sellPrice" column="sell_price"/>
+        <result property="rottenPercentage" column="rotten_percentage"/>
+        <result property="rotPerDay" column="rot_per_day"/>
     </resultMap>
 </mapper>

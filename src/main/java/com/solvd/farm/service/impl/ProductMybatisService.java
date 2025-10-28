@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-
 public class ProductMybatisService implements IProductService {
     public static final Logger LOGGER = LogManager.getLogger(ProductMybatisService.class);
     private final ProductDAO productDAO;
@@ -39,6 +38,20 @@ public class ProductMybatisService implements IProductService {
         LOGGER.info(" ");
         LOGGER.info("List of all products:");
         productList.stream().forEach(LOGGER::info);
+    }
+
+    public void displayFull() {
+        ArrayList<Product> productList = productDAO.productList();
+        LOGGER.info("List of all products:");
+        LOGGER.info("productId sellPrice rottenPercentage purchasableId name quantity pricePerUnit");
+        productList.stream().forEach((p) -> {
+            LOGGER.info(p.getProductId() + " " + p.getSellPrice() + " " + p.getRottenPercentage() + " " + p.getPurchasableId() +
+                    " " + p.getName() + " " + p.getQuantity() + " " + p.getPrice());
+        });
+    }
+
+    public ArrayList<Product> productList() {
+        return productDAO.productList();
     }
 
 }

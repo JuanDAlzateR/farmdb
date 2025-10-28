@@ -16,13 +16,13 @@ public class MybatisSessionHolder {
     public static SqlSessionFactory getSession() {
         InputStream inputStream;
         try {
-            inputStream= Resources.getResourceAsStream("mybatis-configuration.xml");
+            inputStream = Resources.getResourceAsStream("mybatis-configuration.xml");
         } catch (IOException e) {
             LOGGER.info("Error loading mybatis config");
             throw new RuntimeException("Mybatis error: ", e);
         }
-        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
-        SqlSessionFactory sessionFactory =builder.build(inputStream);
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory sessionFactory = builder.build(inputStream);
         return sessionFactory;
     }
 

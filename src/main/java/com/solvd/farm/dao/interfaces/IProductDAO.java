@@ -9,5 +9,5 @@ public interface IProductDAO {
 
     Product getProductById(int id);
 
-    public ArrayList<Product> productList();
+    ArrayList<Product> productList();
 }

@@ -47,8 +47,8 @@ public class Main {
 
     private static void useServices() {
 
-        //-------------ProductService
-        ProductService productService = new ProductService();
+        //-------------ProductService Mybatis
+        ProductMybatisService productService = new ProductMybatisService();
 
         LOGGER.info("product searched with id=2:");
         LOGGER.info(productService.getProductById(2));
@@ -72,8 +72,8 @@ public class Main {
 
         toolService.save(tool2);
 
-        //-------------CountableService
-        CountableService countableService = new CountableService();
+        //-------------CountableService Mybatis
+        CountableMybatisService countableService = new CountableMybatisService();
 
         LOGGER.info("countable searched with id=2:");
         LOGGER.info(countableService.getCountableById(2));
