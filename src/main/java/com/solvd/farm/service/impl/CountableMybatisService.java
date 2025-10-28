@@ -37,7 +37,7 @@ public class CountableMybatisService implements ICountableService {
         ArrayList<Countable> countableList = countableDAO.countableList();
         LOGGER.info(" ");
         LOGGER.info("List of all countables:");
-        countableList.stream().forEach(LOGGER::info);
+        countableList.stream().forEach((c)->{LOGGER.info("id: "+c.getCountableId()+" name: "+c.getName()+" quantity: "+c.getQuantity()+" farmId: "+c.getFarmId());});
     }
 
 }

@@ -7,33 +7,23 @@
         INSERT INTO Countable (name, quantity, Farms_id) VALUES (#{name}, #{quantity}, #{farmId});
     </insert>
 
-    <!-- sql tags: they are templates -->
-<!--
-    <sql id="simplifiedFindBody">
-        c.id as company_id,
-        c.name as company_name,
-        c.description as company_description
-    </sql>
-
-    <sql id="find">
-        Select
-        <include refid="simplifiedFindBody"/>,
-        c.created_at as company_created_at,
-        c.modified_at as company_modified_at,
-        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findBody"/>
-        From
-        Companies c
-        Left Join
-        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findJoins"/>
-        On
-        c.id = e.company_id
-    </sql>
-
-    <select id="findAll" resultMap="CountableResultMap">
-        <include refid="find"/>
-        <![CDATA[Where e.age > 18]]>
+    <select id="getCountableById" parameterType="int" resultType="com.solvd.farm.model.Product">
+        SELECT Cble.*
+        FROM Countable Cble
+        WHERE Cble.id=#{id};
     </select>
--->
+
+    <update id="update" parameterType="map">
+        UPDATE Countable
+        SET name =#{name} , quantity = #{quantity}, Farms_id = #{farmId}
+        WHERE id=#{id};
+    </update>
+
+    <!-- sql tags: they are templates -->
+
+    <select id="countableList" resultMap="CountableResultMap">
+        SELECT * FROM Countable;
+    </select>
 
     <!-- We use model.Product because countable it's an abstract class. -->
     <!-- We may change it if we need to -->

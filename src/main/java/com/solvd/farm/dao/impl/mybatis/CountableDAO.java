@@ -28,21 +28,25 @@ public class CountableDAO implements ICountableDAO {
 
     @Override
     public Countable getCountableById(int id) {
-        return null;
+        try (SqlSession session = MybatisSessionHolder.getSession().openSession(true)) {
+            ICountableDAO countableDAO = session.getMapper(ICountableDAO.class);
+            return countableDAO.getCountableById(id);
+        }
     }
 
-    /* It returns a default product, but with the fields of a Countable
-     */
-    private Countable countableFromRS(ResultSet rs) throws SQLException {
-        return null;
-
-    }
-
+    @Override
     public ArrayList<Countable> countableList() {
-        return null;
+        try (SqlSession session = MybatisSessionHolder.getSession().openSession(true)) {
+            ICountableDAO countableDAO = session.getMapper(ICountableDAO.class);
+            return countableDAO.countableList();
+        }
     }
 
+    @Override
     public void update(int id, String name, float quantity, int farmId) {
-
+        try (SqlSession session = MybatisSessionHolder.getSession().openSession(true)) {
+            ICountableDAO countableDAO = session.getMapper(ICountableDAO.class);
+            countableDAO.update(id,name,quantity,farmId);
+        }
     }
 }

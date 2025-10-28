@@ -23,7 +23,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
             "FROM Countable Cble " +
             "WHERE Cble.id=LAST_INSERT_ID();";
 
-    private final static String ALL_COUNTABLE_SQL = "SELECT * FROM Countable";
+    private final static String ALL_COUNTABLE_SQL = "SELECT * FROM Countable;";
 
     private final static String UPDATE_COUNTABLE_SQL = "UPDATE Countable " +
             "SET name = ?, quantity = ?, Farms_id = ? " +
