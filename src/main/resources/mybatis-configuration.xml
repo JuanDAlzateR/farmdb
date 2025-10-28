@@ -19,5 +19,6 @@
     </environments>
     <mappers>
         <mapper resource="mapper/CountableMapper.xml"/>
+        <mapper resource="mapper/ProductMapper.xml"/>
     </mappers>
 </configuration>

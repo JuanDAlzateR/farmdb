@@ -151,6 +151,7 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
 
     }
 
+    @Override
     public ArrayList<Product> productList() {
         Connection connection = null;
         PreparedStatement ps = null;

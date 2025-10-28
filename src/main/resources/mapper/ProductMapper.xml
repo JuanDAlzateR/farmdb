@@ -1,44 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com/solvd/farm/dao/interfaces/ICountableDAO">
-
-    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
-        Insert into Companies (name, description) values (#{name}, #{description});
+<mapper namespace="com.solvd.farm.dao.interfaces.IProductDAO">
+    <!-- keyColumn: Column in Data Base. keyProperty: field in java class     -->
+    <insert id="save" statementType="CALLABLE" keyColumn="id" keyProperty="productId" useGeneratedKeys="true">
+    <!-- // Insert purchasable product (name, quantity, price_per_unit, Farms_id, sell_price, rotten_percentage, rot_per_day)   -->
+    CALL InsertPurchasableProduct(#{name},#{quantity},#{pricePerUnit},#{farmId},#{sellPrice},#{rottenPercentage},#{rotPerDay});
     </insert>
 
-    <sql id="simplifiedFindBody">
-        c.id as company_id,
-        c.name as company_name,
-        c.description as company_description
-    </sql>
-
-    <sql id="find">
-        Select
-        <include refid="simplifiedFindBody"/>,
-        c.created_at as company_created_at,
-        c.modified_at as company_modified_at,
-        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findBody"/>
-        From
-        Companies c
-        Left Join
-        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findJoins"/>
-        On
-        c.id = e.company_id
-    </sql>
-
-    <select id="findAll" resultMap="CompanyResultMap">
-        <include refid="find"/>
-        <![CDATA[Where e.age > 18]]>
+    <select id="getCountableById" parameterType="int" resultType="com.solvd.farm.model.Product">
+        SELECT Cble.*
+        FROM Countable Cble
+        WHERE Cble.id=#{id};
     </select>
 
-    <resultMap id="CompanyResultMap" type="com.solvd.lesson17prev.domain.Company" autoMapping="false">
-        <id property="id" column="company_id"/>
-        <result property="name" column="company_name"/>
-        <result property="description" column="company_description"/>
-        <result property="createdAt" column="company_created_at"/>
-        <result property="modifiedAt" column="company_modified_at"/>
-        <collection property="employees" columnPrefix="company_"
-                    resultMap="com.solvd.lesson17prev.persistence.EmployeeRepository.EmployeeResultMap"/>
+    <update id="update" parameterType="map">
+        UPDATE Countable
+        SET name =#{name} , quantity = #{quantity}, Farms_id = #{farmId}
+        WHERE id=#{id};
+    </update>
+
+    <!-- sql tags: they are templates -->
+
+    <select id="countableList" resultMap="CountableResultMap">
+        SELECT * FROM Countable;
+    </select>
+
+    <!-- We use model.Product because countable it's an abstract class. -->
+    <!-- We may change it if we need to -->
+    <resultMap id="CountableResultMap" type="com.solvd.farm.model.Product" autoMapping="false">
+        <!-- Column: Column in Data Base. Property: field in java class -->
+        <!-- id-->
+        <id property="countableId" column="id"/>
+        <!-- other fields-->
+        <result property="name" column="name"/>
+        <result property="quantity" column="quantity"/>
+        <result property="farmId" column="Farms_id"/>
     </resultMap>
 </mapper>
