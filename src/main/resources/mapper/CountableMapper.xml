@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com/solvd/farm/dao/interfaces/ICountableDAO">
+    <!-- keyColumn: Column in Data Base. keyProperty: field in java class -->
+    <insert id="save" keyColumn="id" keyProperty="countableId" useGeneratedKeys="true">
+        INSERT INTO Countable (name, quantity, Farms_id) VALUES (#{name}, #{quantity}, #{farmId});
+    </insert>
+
+    <!-- sql tags: they are templates -->
+<!--
+    <sql id="simplifiedFindBody">
+        c.id as company_id,
+        c.name as company_name,
+        c.description as company_description
+    </sql>
+
+    <sql id="find">
+        Select
+        <include refid="simplifiedFindBody"/>,
+        c.created_at as company_created_at,
+        c.modified_at as company_modified_at,
+        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findBody"/>
+        From
+        Companies c
+        Left Join
+        <include refid="com.solvd.lesson17prev.persistence.EmployeeRepository.findJoins"/>
+        On
+        c.id = e.company_id
+    </sql>
+
+    <select id="findAll" resultMap="CountableResultMap">
+        <include refid="find"/>
+        <![CDATA[Where e.age > 18]]>
+    </select>
+-->
+
+    <!-- We use model.Product because countable it's an abstract class. -->
+    <!-- We may change it if we need to -->
+    <resultMap id="CountableResultMap" type="com.solvd.farm.model.Product" autoMapping="false">
+        <!-- Column: Column in Data Base. Property: field in java class -->
+        <!-- id-->
+        <id property="countableId" column="id"/>
+        <!-- other fields-->
+        <result property="name" column="name"/>
+        <result property="quantity" column="quantity"/>
+        <result property="farmId" column="Farms_id"/>
+    </resultMap>
+</mapper>

@@ -1,5 +1,6 @@
-package com.solvd.farm.dao.impl.mysql;
+package com.solvd.farm.dao.impl.mybatis;
 
+import com.solvd.farm.dao.impl.mysql.BaseDAO;
 import com.solvd.farm.dao.interfaces.ICountableDAO;
 import com.solvd.farm.model.Countable;
 import com.solvd.farm.model.Product;
