@@ -5,5 +5,6 @@ import com.solvd.farm.dao.interfaces.IProductDAO;
 
 public interface IDAOFactory {
     IProductDAO createProductDAO();
+
     ICountableDAO createCountableDAO();
 }

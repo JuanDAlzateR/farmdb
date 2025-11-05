@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ToolService implements IToolService {
     public static final Logger LOGGER = LogManager.getLogger(ToolService.class);
-    private final IMySQLDAOFactory factory= (IMySQLDAOFactory) DAOFactoryProducer.getFactory(DAOImpl.MYSQL);
+    private final IMySQLDAOFactory factory = (IMySQLDAOFactory) DAOFactoryProducer.getFactory(DAOImpl.MYSQL);
     public final ToolDAO toolDAO = factory.createToolDAO();
 
     @Override

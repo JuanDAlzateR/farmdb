@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Services from DAO
+        //Services for DAO
         useServices();
 
         //Services from DOM
@@ -43,6 +43,17 @@ public class Main {
         animalTypeJSONService.addAnimalType(newAnimalType);
         LOGGER.info(animalTypeJSONService.getAnimalTypeBySubcategory("New Animal Type"));
         LOGGER.info("");
+
+        AnimalFood milk = new AnimalFood("milk", 10, 5, Unit.GALLON);
+
+        //Use of builder
+        Animal cow = new Animal.Builder("cow")
+                .quantity(2)
+                .animalType(AnimalTypeEnum.CATTLE)
+                .animalFood(milk)
+                .build();
+
+        LOGGER.info("Cow animal: " + cow);
 
     }
 

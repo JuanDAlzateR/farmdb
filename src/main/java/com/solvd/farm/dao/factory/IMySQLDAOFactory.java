@@ -5,5 +5,6 @@ import com.solvd.farm.dao.impl.mysql.ToolDAO;
 
 public interface IMySQLDAOFactory {
     PurchasableDAO createPurchasableDAO();
+
     ToolDAO createToolDAO();
 }

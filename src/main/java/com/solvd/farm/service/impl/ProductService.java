@@ -17,7 +17,7 @@ public class ProductService implements IProductService {
     private final IProductDAO productDAO;
 
     public ProductService(DAOImpl type) {
-        factory= DAOFactoryProducer.getFactory(type);
+        factory = DAOFactoryProducer.getFactory(type);
         productDAO = factory.createProductDAO();
     }
 

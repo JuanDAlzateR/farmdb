@@ -1,6 +1,6 @@
 package com.solvd.farm.model;
 
-public abstract class Animal extends Purchasable {
+public class Animal extends Purchasable {
 
     private AnimalFood animalFood;
     private AnimalFeed animalFeed;
@@ -19,6 +19,17 @@ public abstract class Animal extends Purchasable {
         this.animalFeed = animalFeed;
         this.animalTypeEnum = animalTypeEnum;
     }
+
+    public Animal(Builder builder) {
+        this.setCountable(builder.getCountableId(), builder.getName(), builder.getQuantity(), builder.getFarmId());
+        this.setPurchasableId(builder.getPurchasableId());
+        this.setPrice(builder.getPrice());
+        this.setCurrency(builder.getCurrency());
+        this.animalFood = builder.animalFood;
+        this.animalFeed = builder.animalFeed;
+        this.animalTypeEnum = builder.animalTypeEnum;
+    }
+
 
     @Override
     public String toString() {
@@ -72,5 +83,68 @@ public abstract class Animal extends Purchasable {
 //        this.animalFeed.consume(days);
 //    }
 //
+
+    public static class Builder extends Purchasable {
+        private AnimalFood animalFood = new AnimalFood();
+        private AnimalFeed animalFeed = new AnimalFeed();
+        private AnimalTypeEnum animalTypeEnum = AnimalTypeEnum.OTHERS;
+
+        public Builder(String name) {
+            this.setCountable(name, 1, 1);
+        }
+
+        //Countable
+        public Builder countableId(int id) {
+            this.setCountableId(id);
+            return this;
+        }
+
+        public Builder quantity(float quantity) {
+            this.setQuantity(quantity);
+            return this;
+        }
+
+        public Builder farmId(int id) {
+            this.setFarmId(id);
+            return this;
+        }
+
+        //Purchasable
+        public Builder purchasableId(int id) {
+            this.setPurchasableId(id);
+            return this;
+        }
+
+        public Builder pricePerUnit(float price) {
+            this.setPrice(price);
+            return this;
+        }
+
+        public Builder currency(Currency currency) {
+            this.setCurrency(currency);
+            return this;
+        }
+
+        //Animal
+        public Builder animalFood(AnimalFood animalFood) {
+            this.animalFood = animalFood;
+            return this;
+        }
+
+        public Builder animalFeed(AnimalFeed animalFeed) {
+            this.animalFeed = animalFeed;
+            return this;
+        }
+
+        public Builder animalType(AnimalTypeEnum animalTypeEnum) {
+            this.animalTypeEnum = animalTypeEnum;
+            return this;
+        }
+
+        public Animal build() {
+            return new Animal(this);
+        }
+
+    }
 
 }

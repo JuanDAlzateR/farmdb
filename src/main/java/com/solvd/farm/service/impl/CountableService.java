@@ -18,9 +18,9 @@ public class CountableService implements ICountableService {
     private final IDAOFactory factory;
     public final ICountableDAO countableDAO;
 
-    public CountableService(DAOImpl type){
-        factory=DAOFactoryProducer.getFactory(type);
-        countableDAO=factory.createCountableDAO();
+    public CountableService(DAOImpl type) {
+        factory = DAOFactoryProducer.getFactory(type);
+        countableDAO = factory.createCountableDAO();
     }
 
     @Override

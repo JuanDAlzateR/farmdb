@@ -13,8 +13,19 @@ import java.util.ArrayList;
 
 public class PurchasableService implements IPurchasableService {
     public static final Logger LOGGER = LogManager.getLogger(PurchasableService.class);
-    private final IMySQLDAOFactory factory= (IMySQLDAOFactory) DAOFactoryProducer.getFactory(DAOImpl.MYSQL);
-    public final PurchasableDAO purchasableDAO = factory.createPurchasableDAO();
+    private final IMySQLDAOFactory factory;
+    public final PurchasableDAO purchasableDAO;
+
+    public PurchasableService() {
+        factory = (IMySQLDAOFactory) DAOFactoryProducer.getFactory(DAOImpl.MYSQL);
+        purchasableDAO = factory.createPurchasableDAO();
+    }
+
+    public PurchasableService(DAOImpl type) {
+        factory = (IMySQLDAOFactory) DAOFactoryProducer.getFactory(type);
+        purchasableDAO = factory.createPurchasableDAO();
+    }
+
     @Override
     public Purchasable getPurchasableById(int id) {
         Purchasable purchasable = purchasableDAO.getPurchasableById(id);
