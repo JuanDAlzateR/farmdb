@@ -1,8 +1,12 @@
 package com.solvd.farm.service.impl;
 
+import com.solvd.farm.dao.factory.DAOFactoryProducer;
+import com.solvd.farm.dao.factory.IDAOFactory;
+import com.solvd.farm.dao.factory.IMySQLDAOFactory;
 import com.solvd.farm.dao.impl.mysql.PurchasableDAO;
 import com.solvd.farm.model.Purchasable;
 import com.solvd.farm.service.interfaces.IPurchasableService;
+import com.solvd.farm.util.DAOImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,8 +14,8 @@ import java.util.ArrayList;
 
 public class PurchasableService implements IPurchasableService {
     public static final Logger LOGGER = LogManager.getLogger(PurchasableService.class);
-    public final PurchasableDAO purchasableDAO = new PurchasableDAO();
-
+    private final IMySQLDAOFactory factory= (IMySQLDAOFactory) DAOFactoryProducer.getFactory(DAOImpl.MYSQL);
+    public final PurchasableDAO purchasableDAO = factory.createPurchasableDAO();
     @Override
     public Purchasable getPurchasableById(int id) {
         Purchasable purchasable = purchasableDAO.getPurchasableById(id);
