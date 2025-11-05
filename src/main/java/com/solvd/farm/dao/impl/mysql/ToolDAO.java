@@ -1,7 +1,6 @@
 package com.solvd.farm.dao.impl.mysql;
 
 import com.solvd.farm.dao.interfaces.IToolDAO;
-import com.solvd.farm.model.Product;
 import com.solvd.farm.model.Tool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

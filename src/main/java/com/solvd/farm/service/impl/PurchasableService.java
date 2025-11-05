@@ -1,7 +1,6 @@
 package com.solvd.farm.service.impl;
 
 import com.solvd.farm.dao.factory.DAOFactoryProducer;
-import com.solvd.farm.dao.factory.IDAOFactory;
 import com.solvd.farm.dao.factory.IMySQLDAOFactory;
 import com.solvd.farm.dao.impl.mysql.PurchasableDAO;
 import com.solvd.farm.model.Purchasable;
