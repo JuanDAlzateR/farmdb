@@ -53,9 +53,5 @@ public class Tool extends Purchasable {
 //        this.wearAndTearPercentage = newPercentage;
 //    }
 //
-//    @Override
-//    public void addToFarm(Farm farm) {
-//        farm.addTool(this);
-//    }
 
 }

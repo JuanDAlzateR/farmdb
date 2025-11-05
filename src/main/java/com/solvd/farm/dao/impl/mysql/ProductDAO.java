@@ -73,33 +73,6 @@ public class ProductDAO extends BaseDAO implements IProductDAO {
 
     }
 
-//    @Override
-//    public void save(Product product){
-//        Connection connection=null;
-//        PreparedStatement ps=null;
-//
-//        try{
-//            //get connection
-//            connection=super.getConnection();
-//            //prepare statement
-//            ps= connection.prepareStatement(saveSql);
-//            setProductStatement(product,ps);
-//            //Result set
-//            int rowsAffected=ps.executeUpdate();
-//            if(rowsAffected>0){
-//                LOGGER.debug("Product added to DB successfully");
-//            }
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }finally {
-//            try{ps.close();}
-//            catch (SQLException e){}
-//            releaseConnection(connection);
-//
-//        }
-//
-//    }
-
     @Override
     public Product getProductById(int id) {
         Connection connection = null;

@@ -18,7 +18,6 @@ public class JSONParser {
             // Read file and cast to root object
             File jsonFile = new File(filePath);
 
-
             ArrayList<Class<U>> objects = MAPPER.readValue(jsonFile, new TypeReference<ArrayList<Class<U>>>() {
             });
 

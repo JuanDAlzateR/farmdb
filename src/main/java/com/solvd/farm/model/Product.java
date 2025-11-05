@@ -73,9 +73,4 @@ public class Product extends Purchasable {
         }
     }
 
-//    @Override
-//    public void addToFarm(Farm farm) {
-//        farm.addProduct(this);
-//    }
-
 }

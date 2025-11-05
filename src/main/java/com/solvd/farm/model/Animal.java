@@ -72,9 +72,5 @@ public abstract class Animal extends Purchasable {
 //        this.animalFeed.consume(days);
 //    }
 //
-//    @Override
-//    public void addToFarm(Farm farm) {
-//        farm.addAnimal(this);
-//    }
 
 }

@@ -2,6 +2,7 @@ package com.solvd.farm;
 
 import com.solvd.farm.model.*;
 import com.solvd.farm.service.impl.*;
+import com.solvd.farm.util.DAOImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,7 +49,7 @@ public class Main {
     private static void useServices() {
 
         //-------------ProductService Mybatis
-        ProductMybatisService productService = new ProductMybatisService();
+        ProductService productService = new ProductService(DAOImpl.MYBATIS);
 
         LOGGER.info("product searched with id=2:");
         LOGGER.info(productService.getProductById(2));
@@ -73,7 +74,7 @@ public class Main {
         toolService.save(tool2);
 
         //-------------CountableService Mybatis
-        CountableMybatisService countableService = new CountableMybatisService();
+        CountableService countableService = new CountableService(DAOImpl.MYBATIS);
 
         LOGGER.info("countable searched with id=2:");
         LOGGER.info(countableService.getCountableById(2));

@@ -85,7 +85,4 @@ public class Crop extends Countable {
         }
     }
 
-//    public void addToFarm(Farm farm) {
-//        farm.addCrop(this);
-//    }
 }

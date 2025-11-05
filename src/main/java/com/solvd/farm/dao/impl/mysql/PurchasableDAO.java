@@ -27,11 +27,6 @@ public class PurchasableDAO extends BaseDAO implements IPurchasableDAO {
             "INNER JOIN Countable Cble ON Pble.Countable_id = Cble.id " +
             "LEFT JOIN Currency C ON Pble.Currency_id = C.id;";
 
-
-//    private final static String LAST_PURCHASABLE_SQL = "SELECT Cble.* " +
-//            "FROM Purchasable Cble " +
-//            "WHERE Cble.id=LAST_INSERT_ID();";
-
     private final static String UPDATE_PURCHASABLE_SQL = "UPDATE Purchasable Pble " +
             "LEFT JOIN Countable Cble ON Pble.Countable_id = Cble.id " +
             "LEFT JOIN Currency C ON Pble.Currency_id = C.id " +

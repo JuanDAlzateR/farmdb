@@ -50,8 +50,4 @@ public class Grain extends Purchasable {
         }
     }
 
-//    @Override
-//    public void addToFarm(Farm farm) {
-//        farm.addGrain(this);
-//    }
 }
