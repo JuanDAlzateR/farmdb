@@ -1,0 +1,17 @@
+<suite name ="new suite">
+    <parameter name ="test" value="1"/>
+            <test name ="regres">
+                <classes>
+                    <class name="com.solvd.farm.newTest">
+                        <methods>
+                            <include name="testMethod1"/>
+
+                            <include name="testMethod2"/>
+
+                        </methods>
+
+                    </class>
+                </classes>
+            </test>
+
+</suite>
