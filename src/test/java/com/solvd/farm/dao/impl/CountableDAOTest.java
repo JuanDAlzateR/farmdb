@@ -30,14 +30,15 @@ public class CountableDAOTest {
         if (countableDAO == null) {
             String daoType = context.getCurrentXmlTest().getParameter("daoType");
             LOGGER.info("starting setup... chosen daoType: " + daoType);
-            if (daoType.equalsIgnoreCase("Mysql")) {
+            if(daoType==null){
+                LOGGER.info("unsupported DAO type: " + daoType+" using Mysql by default.");
+                this.countableDAO = new CountableDAO();
+            }else if (daoType.equalsIgnoreCase("Mysql")) {
                 this.countableDAO = new CountableDAO();
                 LOGGER.info("using MySql...");
             } else if (daoType.equalsIgnoreCase("Mybatis")) {
                 this.countableDAO = new com.solvd.farm.dao.impl.mybatis.CountableDAO();
                 LOGGER.info("using Mybatis...");
-            } else {
-                throw new IllegalArgumentException("unsupported DAO type: " + daoType);
             }
         }
 

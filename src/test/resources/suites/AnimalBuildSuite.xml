@@ -1,0 +1,58 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name ="AnimalBuildSuite">
+
+    <test name ="countable build">
+        <classes>
+            <class name="com.solvd.farm.model.AnimalBuilderTest">
+                <methods>
+                    <include name="testCountableBuild"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="purchasable build">
+        <classes>
+            <class name="com.solvd.farm.model.AnimalBuilderTest">
+                <methods>
+                    <include name="testPurchasableBuild"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="animal food build">
+        <classes>
+            <class name="com.solvd.farm.model.AnimalBuilderTest">
+                <methods>
+                    <include name="testAnimalFoodBuild"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="animal feed build">
+        <classes>
+            <class name="com.solvd.farm.model.AnimalBuilderTest">
+                <methods>
+                    <include name="testAnimalFeedBuild"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name ="animal type build">
+        <classes>
+            <class name="com.solvd.farm.model.AnimalBuilderTest">
+                <methods>
+                    <include name="testAnimalTypeBuild"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+
+
+</suite>

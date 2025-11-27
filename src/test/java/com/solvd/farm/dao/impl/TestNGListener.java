@@ -4,6 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.IExecutionListener;
 
+
+/**
+ * This is just an example of a Listener
+ */
 public class TestNGListener implements IExecutionListener {
     public static final Logger LOGGER = LogManager.getLogger(TestNGListener.class);
 

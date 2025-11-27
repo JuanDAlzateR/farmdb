@@ -77,7 +77,11 @@ public class Animal extends Purchasable {
         return this.animalFeed;
     }
 
-//    @Override
+    public AnimalTypeEnum getAnimalTypeEnum() {
+        return animalTypeEnum;
+    }
+
+    //    @Override
 //    public void passTime(int days) {
 //        this.animalFood.produce(days);
 //        this.animalFeed.consume(days);
