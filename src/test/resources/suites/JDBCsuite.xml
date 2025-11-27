@@ -1,0 +1,50 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name ="JDBCsuite">
+    <parameter name ="test" value="1"/>
+            <test name ="delete">
+                <groups>
+                    <run>
+                        <include name="save before"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                        <methods>
+                            <include name="testDeleteCountable"/>
+                        </methods>
+                    </class>
+                </classes>
+            </test>
+
+            <test name ="save">
+                <groups>
+                    <run>
+                        <include name="delete after"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                        <methods>
+                            <include name="testSaveCountableSuccessAndIdInjection"/>
+                        </methods>
+                    </class>
+                </classes>
+            </test>
+
+            <test name ="list">
+                <groups>
+                    <run>
+                        <include name="save before"/>
+                        <include name="delete after"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                        <methods>
+                            <include name="testGetCountableList"/>
+                        </methods>
+                    </class>
+                </classes>
+            </test>
+
+</suite>

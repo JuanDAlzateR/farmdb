@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountableDAO extends BaseDAO implements ICountableDAO {
     public static final Logger LOGGER = LogManager.getLogger(CountableDAO.class);
@@ -27,6 +28,9 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
 
     private final static String UPDATE_COUNTABLE_SQL = "UPDATE Countable " +
             "SET name = ?, quantity = ?, Farms_id = ? " +
+            "WHERE id=?;";
+
+    private final static String DELETE_COUNTABLE_SQL = "DELETE FROM Countable " +
             "WHERE id=?;";
 
 
@@ -87,9 +91,9 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
 
             //Result set
             rs = ps.executeQuery();
-            rs.next();
+            //rs.next(); //countableFromRSorNull moves the cursor.
 
-            return countableFromRS(rs);
+            return countableFromRSorNull(rs);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -183,5 +187,75 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
         }
 
     }
+
+    public void delete(int id) {
+        Connection connection = null;
+        CallableStatement cs1 = null;
+
+        try {
+            //get connection
+            connection = super.getConnection();
+            //prepare statement
+            cs1 = connection.prepareCall(DELETE_COUNTABLE_SQL);
+            cs1.setInt(1, id);
+
+            //Result set
+            int rowsAffected1 = cs1.executeUpdate();
+
+            if (rowsAffected1 > 0) {
+                LOGGER.debug("Countable deleted from DB successfully");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                cs1.close();
+            } catch (SQLException e) {
+            }
+            releaseConnection(connection);
+
+        }
+
+    }
+
+
+     /**
+     * Verifies if the result set it's empty.
+     * If it is not empty, moves the cursor to the first line.
+     *
+     * @param rs ResultSet
+     * @return boolean
+     */
+    public boolean isResultSetEmpty(ResultSet rs) throws SQLException {
+        if (rs == null) {
+            return true;
+        }
+
+        // Tries to move the cursor to the first line.
+        // If returns false, there are not lines in the rs.
+        boolean hasNext = rs.next();
+
+        if (!hasNext) {
+            // the sr is empty
+            return true;
+        } else {
+            // The rs has at least one line (cursor is allready on the first line)
+            return false;
+        }
+    }
+
+    /**
+     *  It returns a default product, but with the fields of a Countable.
+     *  If the result set is empty, it returns a "No match" countable.
+     */
+    private Countable countableFromRSorNull(ResultSet rs) throws SQLException {
+        Boolean rsEmpty = isResultSetEmpty(rs);
+        if(rsEmpty){
+            return  null;
+        }else {
+            return countableFromRS(rs);
+        }
+    }
+
 
 }
