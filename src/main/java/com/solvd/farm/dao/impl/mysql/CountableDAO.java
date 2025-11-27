@@ -190,11 +190,11 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
 
     @Override
     public void update(Countable countable) {
-        int id=countable.getCountableId();
-        String name=countable.getName();
-        float quantity=countable.getQuantity();
-        int farmId=countable.getFarmId();
-        update(id,name,quantity,farmId);
+        int id = countable.getCountableId();
+        String name = countable.getName();
+        float quantity = countable.getQuantity();
+        int farmId = countable.getFarmId();
+        update(id, name, quantity, farmId);
     }
 
     @Override
@@ -229,7 +229,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
     }
 
 
-     /**
+    /**
      * Verifies if the result set it's empty.
      * If it is not empty, moves the cursor to the first line.
      *
@@ -255,14 +255,14 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
     }
 
     /**
-     *  It returns a default product, but with the fields of a Countable.
-     *  If the result set is empty, it returns a "No match" countable.
+     * It returns a default product, but with the fields of a Countable.
+     * If the result set is empty, it returns a "No match" countable.
      */
     private Countable countableFromRSorNull(ResultSet rs) throws SQLException {
         Boolean rsEmpty = isResultSetEmpty(rs);
-        if(rsEmpty){
-            return  null;
-        }else {
+        if (rsEmpty) {
+            return null;
+        } else {
             return countableFromRS(rs);
         }
     }

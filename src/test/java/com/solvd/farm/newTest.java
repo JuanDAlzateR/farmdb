@@ -8,7 +8,7 @@ import java.util.Set;
  * Unit tests for the a class.
  * Tests
  */
-public class newTest{
+public class newTest {
 
     @BeforeSuite
     public void beforeSuite() {
@@ -30,10 +30,10 @@ public class newTest{
         System.out.println("Before Method: Executing before each test method.");
     }
 
-    @Test(testName = "first test", description = "example test using testNG",dataProvider = "provider")
+    @Test(testName = "first test", description = "example test using testNG", dataProvider = "provider")
     public void testMethod1(String name, String pass) {
         System.out.println("Running Test Method 1.");
-        System.out.println(name+" "+pass);
+        System.out.println(name + " " + pass);
     }
 
     @Test
@@ -62,10 +62,10 @@ public class newTest{
     }
 
     @DataProvider(name = "provider")
-    public Object [][] data(){
+    public Object[][] data() {
         return new Object[][]{
-                {"user1","pass1"},
-                {"user2","pass2"},
+                {"user1", "pass1"},
+                {"user2", "pass2"},
         };
     }
 }

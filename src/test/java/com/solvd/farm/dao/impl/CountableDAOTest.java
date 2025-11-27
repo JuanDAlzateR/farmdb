@@ -27,9 +27,9 @@ public class CountableDAOTest {
     // TestNG injects the parameter in CountableDAOSuite.xml
     @BeforeTest(alwaysRun = true) //Forces execution ignoring group and method filters
     public void updateCountableDAO(ITestContext context) {
-        if(countableDAO==null){
-            String daoType=context.getCurrentXmlTest().getParameter("daoType");
-            LOGGER.info("starting setup..."+daoType);
+        if (countableDAO == null) {
+            String daoType = context.getCurrentXmlTest().getParameter("daoType");
+            LOGGER.info("starting setup..." + daoType);
             if (daoType.equalsIgnoreCase("Mysql")) {
                 this.countableDAO = new CountableDAO();
                 LOGGER.info("using MySql...");
@@ -44,7 +44,7 @@ public class CountableDAOTest {
     }
 
 
-    @Test(groups = {"delete after"},testName = "Verify insertion and ID", description = "verifies insertion and generated ID injection", dataProvider = "Countable Provider")
+    @Test(groups = {"delete after"}, testName = "Verify insertion and ID", description = "verifies insertion and generated ID injection", dataProvider = "Countable Provider")
     public void testSaveCountableSuccessAndIdInjection(Countable countable) {
         // The initial ID must be 0
         countable.setCountableId(0);
@@ -52,7 +52,7 @@ public class CountableDAOTest {
 
         // ACT
         countableDAO.save(countable);
-        this.testCountable=countable;
+        this.testCountable = countable;
         // ASSERT
 
         // 1. No exception (implicit)
@@ -74,7 +74,7 @@ public class CountableDAOTest {
     }
 
 
-    @Test(groups = {"save before"},testName = "Verify delete", description = "verifies delete of a Countable", dataProvider = "Countable Provider")
+    @Test(groups = {"save before"}, testName = "Verify delete", description = "verifies delete of a Countable", dataProvider = "Countable Provider")
     public void testDeleteCountable(Countable countable) {
 
         // ACT (Acción): Ejecutar el método a probar
@@ -89,51 +89,51 @@ public class CountableDAOTest {
 
         Assert.assertNull(retrievedCountable,
                 "Object hasn't been deleted from DB.");
-        this.testCountable=null;
+        this.testCountable = null;
 
     }
 
-    @Test(groups = {"save before","delete after"},testName = "check find countable by id", description = "verifies finding countables", dataProvider = "Countable Provider")
+    @Test(groups = {"save before", "delete after"}, testName = "check find countable by id", description = "verifies finding countables", dataProvider = "Countable Provider")
     public void testGetCountableById(Countable countable) {
 
-      Countable countable1=countableDAO.getCountableById(countable.getCountableId());
+        Countable countable1 = countableDAO.getCountableById(countable.getCountableId());
 
-      Assert.assertEquals(countable1.getName(),countable.getName(),"Objects doesn't have the same name");
-        Assert.assertEquals(countable1.getCountableId(),countable.getCountableId(),"Objects doesn't have the same id");
+        Assert.assertEquals(countable1.getName(), countable.getName(), "Objects doesn't have the same name");
+        Assert.assertEquals(countable1.getCountableId(), countable.getCountableId(), "Objects doesn't have the same id");
 
     }
 
-    @Test(groups = {"save before","delete after"},testName = "Verify list creation", description = "verifies retriaval of Countable list", dataProvider = "Countable Provider")
+    @Test(groups = {"save before", "delete after"}, testName = "Verify list creation", description = "verifies retriaval of Countable list", dataProvider = "Countable Provider")
     public void testGetCountableList(Countable countable) {
 
-        List<Countable> list=countableDAO.countableList();
+        List<Countable> list = countableDAO.countableList();
 
-        Assert.assertFalse(list.isEmpty(),"The retrieved list is empty");
+        Assert.assertFalse(list.isEmpty(), "The retrieved list is empty");
 
-        Assert.assertEquals(list.getLast().getName(),countable.getName(),"Object is not at the end of the list");
+        Assert.assertEquals(list.getLast().getName(), countable.getName(), "Object is not at the end of the list");
 
     }
 
-    @Test(groups = {"save before","delete after"},testName = "Verify list creation", description = "verifies retriaval of Countable list", dataProvider = "Countable Provider")
+    @Test(groups = {"save before", "delete after"}, testName = "Verify list creation", description = "verifies retriaval of Countable list", dataProvider = "Countable Provider")
     public void testUpdateCountable(Countable countable) {
 
-        Countable updateCountable=countableDAO.getCountableById(testCountable.getCountableId());
-        updateCountable.setName(updateCountable.getName()+" updated");
+        Countable updateCountable = countableDAO.getCountableById(testCountable.getCountableId());
+        updateCountable.setName(updateCountable.getName() + " updated");
 
         countableDAO.update(updateCountable);
 
-        Countable retriveCountable=countableDAO.getCountableById(testCountable.getCountableId());
+        Countable retriveCountable = countableDAO.getCountableById(testCountable.getCountableId());
 
-        Assert.assertEquals(retriveCountable.getName(),testCountable.getName()+" updated","Object didn't update");
+        Assert.assertEquals(retriveCountable.getName(), testCountable.getName() + " updated", "Object didn't update");
 
     }
 
     @DataProvider(name = "Countable Provider")
-    public Object [][] data(){
+    public Object[][] data() {
         Product countable1 = new Product();
-        countable1.setCountable(0,"Apple Test", 1, 1);
+        countable1.setCountable(0, "Apple Test", 1, 1);
         Product countable2 = new Product();
-        countable2.setCountable(0,"Lemon Test", 2, 1);
+        countable2.setCountable(0, "Lemon Test", 2, 1);
         return new Object[][]{
                 //name, quantity, farmId
                 {countable1},
@@ -154,7 +154,7 @@ public class CountableDAOTest {
 
         countableDAO.save(countable);
 
-        this.testCountable=countable;
+        this.testCountable = countable;
 //        LOGGER.info("Saving Countable with ID: "+countable.getCountableId());
     }
 
