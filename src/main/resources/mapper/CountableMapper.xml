@@ -7,7 +7,7 @@
         INSERT INTO Countable (name, quantity, Farms_id) VALUES (#{name}, #{quantity}, #{farmId});
     </insert>
 
-    <select id="getCountableById" parameterType="int" resultType="com.solvd.farm.model.Product">
+    <select id="getCountableById" parameterType="int" resultMap="CountableResultMap">
         SELECT Cble.*
         FROM Countable Cble
         WHERE Cble.id=#{id};
@@ -18,6 +18,11 @@
         SET name =#{name} , quantity = #{quantity}, Farms_id = #{farmId}
         WHERE id=#{id};
     </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM Countable
+        WHERE id = #{id};
+    </delete>
 
     <!-- sql tags: they are templates -->
 

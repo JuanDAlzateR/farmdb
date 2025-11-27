@@ -1,6 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name ="MysqlSuite">
-    <parameter name ="test" value="1"/>
+<suite name ="CountableSuite">
+    <parameter name ="daoType" value="Mybatis"/><!--Choose daoType: Mybatis or Mysql-->
+
             <test name ="delete">
                 <groups>
                     <run>
@@ -8,7 +9,7 @@
                     </run>
                 </groups>
                 <classes>
-                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
                         <methods>
                             <include name="testDeleteCountable"/>
                         </methods>
@@ -23,9 +24,25 @@
                     </run>
                 </groups>
                 <classes>
-                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
                         <methods>
                             <include name="testSaveCountableSuccessAndIdInjection"/>
+                        </methods>
+                    </class>
+                </classes>
+            </test>
+
+            <test name ="find">
+                <groups>
+                    <run>
+                        <include name="save before"/>
+                        <include name="delete after"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
+                        <methods>
+                            <include name="testGetCountableById"/>
                         </methods>
                     </class>
                 </classes>
@@ -39,7 +56,7 @@
                     </run>
                 </groups>
                 <classes>
-                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
                         <methods>
                             <include name="testGetCountableList"/>
                         </methods>
@@ -55,7 +72,7 @@
                     </run>
                 </groups>
                 <classes>
-                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
                         <methods>
                             <include name="testUpdateCountable"/>
                         </methods>

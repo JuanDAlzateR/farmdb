@@ -15,4 +15,8 @@ public interface ICountableDAO {
 
     //the Param anottation it's only used for Mybatis
     void update(@Param("id") int id, @Param("name") String name, @Param("quantity") float quantity, @Param("farmId") int farmId);
+
+    void update(Countable countable);
+
+    void delete(int id);
 }

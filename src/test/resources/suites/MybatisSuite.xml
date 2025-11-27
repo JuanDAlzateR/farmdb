@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name ="MysqlSuite">
+<suite name ="MybatisSuite">
     <parameter name ="test" value="1"/>
             <test name ="delete">
                 <groups>

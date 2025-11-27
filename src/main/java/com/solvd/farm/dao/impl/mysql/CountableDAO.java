@@ -188,6 +188,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
 
     }
 
+    @Override
     public void update(Countable countable) {
         int id=countable.getCountableId();
         String name=countable.getName();
@@ -196,6 +197,7 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
         update(id,name,quantity,farmId);
     }
 
+    @Override
     public void delete(int id) {
         Connection connection = null;
         CallableStatement cs1 = null;

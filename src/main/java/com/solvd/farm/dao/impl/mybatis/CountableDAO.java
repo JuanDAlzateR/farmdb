@@ -46,4 +46,22 @@ public class CountableDAO implements ICountableDAO {
             countableDAO.update(id, name, quantity, farmId);
         }
     }
+
+    @Override
+    public void update(Countable countable) {
+        int id=countable.getCountableId();
+        String name=countable.getName();
+        float quantity=countable.getQuantity();
+        int farmId=countable.getFarmId();
+
+        update(id,name,quantity,farmId);
+    }
+
+    @Override
+    public void delete(int id) {
+        try (SqlSession session = MybatisSessionHolder.getSession().openSession(true)) {
+            ICountableDAO countableDAO = session.getMapper(ICountableDAO.class);
+            countableDAO.delete(id);
+        }
+    }
 }
