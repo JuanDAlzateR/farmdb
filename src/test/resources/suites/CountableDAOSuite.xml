@@ -32,7 +32,7 @@
                 </classes>
             </test>
 
-            <test name ="find">
+            <test name ="get and update">
                 <groups>
                     <run>
                         <include name="save before"/>
@@ -43,41 +43,12 @@
                     <class name="com.solvd.farm.dao.impl.CountableDAOTest">
                         <methods>
                             <include name="testGetCountableById"/>
-                        </methods>
-                    </class>
-                </classes>
-            </test>
-
-            <test name ="list">
-                <groups>
-                    <run>
-                        <include name="save before"/>
-                        <include name="delete after"/>
-                    </run>
-                </groups>
-                <classes>
-                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
-                        <methods>
                             <include name="testGetCountableList"/>
-                        </methods>
-                    </class>
-                </classes>
-            </test>
-
-            <test name ="update">
-                <groups>
-                    <run>
-                        <include name="save before"/>
-                        <include name="delete after"/>
-                    </run>
-                </groups>
-                <classes>
-                    <class name="com.solvd.farm.dao.impl.CountableDAOTest">
-                        <methods>
                             <include name="testUpdateCountable"/>
                         </methods>
                     </class>
                 </classes>
             </test>
+
 
 </suite>

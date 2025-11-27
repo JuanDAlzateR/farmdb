@@ -13,7 +13,7 @@ import org.testng.annotations.*;
 import java.util.List;
 
 /**
- * Unit tests for the class mysql/CountableDAO.java
+ * Unit tests for the class CountableDAO.java (Mysql and Mybatis)
  * Tests
  */
 @Listeners(TestNGListener.class)
@@ -29,7 +29,7 @@ public class CountableDAOTest {
     public void updateCountableDAO(ITestContext context) {
         if (countableDAO == null) {
             String daoType = context.getCurrentXmlTest().getParameter("daoType");
-            LOGGER.info("starting setup..." + daoType);
+            LOGGER.info("starting setup... chosen daoType: " + daoType);
             if (daoType.equalsIgnoreCase("Mysql")) {
                 this.countableDAO = new CountableDAO();
                 LOGGER.info("using MySql...");
@@ -114,7 +114,7 @@ public class CountableDAOTest {
 
     }
 
-    @Test(groups = {"save before", "delete after"}, testName = "Verify list creation", description = "verifies retriaval of Countable list", dataProvider = "Countable Provider")
+    @Test(groups = {"save before", "delete after"}, testName = "Verify update countable", description = "verifies update in DB", dataProvider = "Countable Provider")
     public void testUpdateCountable(Countable countable) {
 
         Countable updateCountable = countableDAO.getCountableById(testCountable.getCountableId());
