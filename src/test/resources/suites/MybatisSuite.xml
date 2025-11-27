@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name ="JDBCsuite">
+<suite name ="MysqlSuite">
     <parameter name ="test" value="1"/>
             <test name ="delete">
                 <groups>
@@ -42,6 +42,22 @@
                     <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
                         <methods>
                             <include name="testGetCountableList"/>
+                        </methods>
+                    </class>
+                </classes>
+            </test>
+
+            <test name ="update">
+                <groups>
+                    <run>
+                        <include name="save before"/>
+                        <include name="delete after"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="com.solvd.farm.dao.impl.mysql.CountableDAOTest">
+                        <methods>
+                            <include name="testUpdateCountable"/>
                         </methods>
                     </class>
                 </classes>

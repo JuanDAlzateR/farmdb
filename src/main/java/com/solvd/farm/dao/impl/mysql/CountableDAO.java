@@ -188,6 +188,14 @@ public class CountableDAO extends BaseDAO implements ICountableDAO {
 
     }
 
+    public void update(Countable countable) {
+        int id=countable.getCountableId();
+        String name=countable.getName();
+        float quantity=countable.getQuantity();
+        int farmId=countable.getFarmId();
+        update(id,name,quantity,farmId);
+    }
+
     public void delete(int id) {
         Connection connection = null;
         CallableStatement cs1 = null;

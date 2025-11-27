@@ -1,11 +1,14 @@
-package com.solvd.farm.dao.impl.mysql;
+package com.solvd.farm.dao.impl.mybatis;
 
 import com.solvd.farm.model.Countable;
 import com.solvd.farm.model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
  * Unit tests for the class mysql/CountableDAO.java
  * Tests
  */
-public class CountableDAOTest{
+public class CountableDAOTest {
     public static final Logger LOGGER = LogManager.getLogger(CountableDAOTest.class);
     private final CountableDAO countableDAO = new CountableDAO();
     private Countable testCountable;
